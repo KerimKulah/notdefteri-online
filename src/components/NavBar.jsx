@@ -1,19 +1,52 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLayerGroup, faThLarge, faList } from '@fortawesome/free-solid-svg-icons'
+import { faLayerGroup, faThLarge, faList, faStar, faFolder } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+
+const iconColorClasses = {
+    red: 'text-red-500',
+    blue: 'text-blue-500',
+    green: 'text-green-500',
+    yellow: 'text-yellow-400',
+    gray: 'text-gray-500',
+    purple: 'text-purple-500',
+};
 
 function NavBar() {
-    return (
+    const { selectedFolder, filter } = useSelector((state) => state.folder);
 
+    // İkonu filtreye göre seç
+    let icon = faLayerGroup;
+    let iconClass = "text-cyan-600";
+    if (filter === "favorite") {
+        icon = faStar;
+        iconClass = "text-yellow-500";
+    } else if (filter === "folder" && selectedFolder) {
+        icon = faFolder;
+        iconClass = iconColorClasses[selectedFolder.color] || "text-gray-500";
+    }
+
+
+
+    return (
         <div className="bg-white shadow-sm mb-4 p-4">
             <div className="container mx-auto">
                 <div className="flex flex-wrap justify-between items-center">
 
-                    {/* Folder info */}
                     <div className="flex items-center space-x-2 text-lg">
-                        <span id="currentFolderIcon" className="text-cyan-600"><FontAwesomeIcon icon={faLayerGroup} /></span>
-                        <span id="currentFolderName">Tüm Notlar</span>
-                        <span id="currentFolderCount" className="text-sm text-gray-500">(0)</span>
+                        <span id="currentFolderIcon" className={iconClass}>
+                            <FontAwesomeIcon icon={icon} />
+                        </span>
+                        <span id="currentFolderName">
+                            {filter === 'favorite'
+                                ? "Favoriler"
+                                : selectedFolder
+                                    ? selectedFolder.name
+                                    : "Tüm Notlar"}
+                        </span>
+                        <span id="currentFolderCount" className="text-sm text-gray-500">
+                            {/* Not sayısı eklemek istersen buraya */}
+                        </span>
                     </div>
 
                     {/* View buttons */}

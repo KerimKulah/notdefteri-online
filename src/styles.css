@@ -1,1 +1,150 @@
 @import "tailwindcss";
+
+/* ReactQuill Editor Styles */
+.quill-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 400px;
+}
+
+.quill-wrapper .ql-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.quill-wrapper .ql-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: white;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.quill-wrapper .ql-editor {
+    min-height: 350px;
+}
+
+/* Note View Styles */
+.note-content {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.note-content h1 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.note-content h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.note-content h3 {
+    font-size: 1.25em;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+.note-content p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+.note-content ul,
+.note-content ol {
+    margin-bottom: 1em;
+    padding-left: 1.5em;
+}
+
+.note-content li {
+    margin-bottom: 0.5em;
+}
+
+.note-content img {
+    max-width: 100%;
+    height: auto;
+    margin: 1em 0;
+}
+
+.note-content blockquote {
+    border-left: 4px solid #e5e7eb;
+    padding-left: 1em;
+    margin: 1em 0;
+    color: #4b5563;
+}
+
+.note-content pre {
+    background-color: #f3f4f6;
+    padding: 1em;
+    border-radius: 0.375rem;
+    overflow-x: auto;
+    margin: 1em 0;
+}
+
+/* Print Styles */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    .note-content-wrapper,
+    .note-content-wrapper * {
+        visibility: visible;
+    }
+
+    .note-content-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 2cm;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .note-title {
+        margin-bottom: 1cm;
+    }
+
+    .note-content {
+        font-size: 12pt;
+        line-height: 1.6;
+    }
+
+    .note-content pre {
+        white-space: pre-wrap;
+        border: 1px solid #ddd;
+    }
+
+    @page {
+        margin: 2cm;
+        size: A4;
+    }
+}
+
+
+/* Animation Styles */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.3s ease-out;
+}

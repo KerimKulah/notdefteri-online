@@ -25,6 +25,14 @@ const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
     return null;
 })
 
+const getUserSession = createAsyncThunk('auth/getUserSession', async () => {
+    const { data, error } = await supabase.auth.getUser();
+    if (error) {
+        throw new Error(error.message);
+    }
+    return data.user;
+})
+
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
@@ -67,9 +75,21 @@ const authSlice = createSlice({
             .addCase(logoutUser.fulfilled, (state) => {
                 state.loading = false;
                 state.user = null;
+            })
+            .addCase(getUserSession.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(getUserSession.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload;
+            })
+            .addCase(getUserSession.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.error.message;
             });
     }
 });
 
-export { registerUser, loginUser, logoutUser };
+export { registerUser, loginUser, logoutUser, getUserSession };
 export default authSlice.reducer;

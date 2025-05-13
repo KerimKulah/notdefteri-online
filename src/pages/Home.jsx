@@ -3,25 +3,49 @@ import Headerr from '../components/Headerr'
 import Sidebar from '../components/Sidebar'
 import Footerr from '../components/Footerr'
 import NotesContainer from '../components/NotesContainer'
+import NoteModal from '../components/NoteModal'
+import { useState } from 'react';
 import NavBar from '../components/NavBar'
 
 
 function home() {
+    const [isModalOpen, setModalOpen] = useState(false);
+    const [selectedNote, setSelectedNote] = useState(null); // null ise yeni not
 
+    const openEmptyModal = () => {
+        setSelectedNote(null);
+        setModalOpen(true);
+    };
+
+    const openEditModal = (note) => {
+        setSelectedNote(note);
+        setModalOpen(true);
+    };
+
+
+    const closeModal = () => {
+        setModalOpen(false);
+        setSelectedNote(null);
+    };
 
     return (
-        <body className='bg-gray-50 text-gray-900s transition-all duration-300 min-h-screen flex flex-col'>
-            <Headerr />
+        <div className='bg-gray-50 text-gray-900s transition-all duration-300 min-h-screen flex flex-col'>
+            <Headerr onAddNoteClick={openEmptyModal} />
             <div className="flex flex-grow">
                 <Sidebar />
                 {/* Main content */}
                 <div className="flex-grow">
                     <NavBar />
-                    <NotesContainer />
+                    <NotesContainer onNoteClick={openEditModal} />
                 </div>
             </div>
             <Footerr />
-        </body >
+
+            {/* Modal for creating/editing notes */}
+            <NoteModal isOpen={isModalOpen} onClose={closeModal} note={selectedNote} />
+
+        </div >
+
     )
 
 

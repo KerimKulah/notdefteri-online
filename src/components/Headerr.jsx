@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../redux/AuthSlice';
 import { useNavigate } from 'react-router-dom';
+import NoteModal from './NoteModal';
+
 
 function Headerr() {
     const navigate = useNavigate();
@@ -14,12 +16,22 @@ function Headerr() {
     const toggleSearch = () => setShowSearch(!showSearch);
     const toggleSettings = () => setShowSettings(!showSettings);
 
-    const openNoteModal = () => {
-        // Not ekleme modalını açma işlemleri burada yapılır
+    // Not ekleme modalını açma ve kapama işlemleri
+    const [isModalOpen, setModalOpen] = useState(false);
+
+    const openEmptyModal = () => {
+        setModalOpen(true);
     };
 
+
+
+    const closeNoteModal = () => {
+        setModalOpen(false);
+    };
+
+
+
     const toggleDarkMode = () => {
-        // Karanlık mod açma işlemleri burada yapılır
     };
 
     const searchNotes = (e) => {
@@ -40,10 +52,10 @@ function Headerr() {
 
     return (
         <>
-            <header className="sticky top-0 z-30 flex items-center justify-between p-4 bg-white shadow-md">
+            <div className="sticky top-0 z-30 flex items-center justify-between p-4 bg-white shadow-md">
                 <div className="flex items-center space-x-2">
                     <button
-                        onClick={openNoteModal}
+                        onClick={openEmptyModal}
                         className="px-3 py-2 rounded-full bg-cyan-600 hover:bg-cyan-700 text-white flex items-center gap-2 transition-all">
                         <FontAwesomeIcon icon={faPlus} />
                         <span>Not Ekle</span>
@@ -102,7 +114,13 @@ function Headerr() {
                                 />
                                 <span>Karanlık Mod</span>
                             </button>
-                            <button className="flex items-center w-full text-left px-4 py-3 hover:bg-gray-100 transition-all">
+                            <button
+                                onClick={() => {
+                                    navigate('/profile');
+                                    setShowSettings(false);
+                                }}
+                                className="flex items-center w-full text-left px-4 py-3 hover:bg-gray-100 transition-all"
+                            >
                                 <FontAwesomeIcon
                                     icon={faUser}
                                     className="mr-3 text-primary-500"
@@ -116,7 +134,9 @@ function Headerr() {
                         </div>
                     )}
                 </div>
-            </header>
+            </div>
+
+            <NoteModal isOpen={isModalOpen} onClose={closeNoteModal} />
         </>
     )
 }
