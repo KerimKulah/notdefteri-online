@@ -4,7 +4,7 @@ import { createNote, updateNote } from '../redux/NoteSlice';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faLock, faStar, faFolder } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faLock, faStar } from '@fortawesome/free-solid-svg-icons';
 
 const INITIAL_FORM_STATE = {
     title: '',
@@ -107,7 +107,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
                                     onChange={e => handleInputChange('folder_id', e.target.value === "" ? null : e.target.value)}
                                     className="w-full max-w-xs px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                                 >
-                                    <option value="">📁 Klasör seçin</option>
+                                    <option value="">Klasör seçin</option>
                                     {folders.map(folder => (
                                         <option key={folder.id} value={folder.id}>{folder.name}</option>
                                     ))}

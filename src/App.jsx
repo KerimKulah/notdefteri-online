@@ -5,14 +5,14 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import NoteView from './pages/NoteView'; // yeni import
+import NoteView from './pages/NoteView';
 import { getUserSession } from './redux/AuthSlice';
 import ProfileSettings from './pages/ProfileSettings';
+import ProtectedRoute from './router/ProtectedRoute';
+import PublicRoute from './router/PublicRoute';
 
 
 function App() {
-
-  // Kullanıcı oturumunu kontrol etmek için gerekli olan Redux eylemini çağırıyoruz
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -23,12 +23,12 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/note/:link" element={<NoteView />} /> {/* yeni route */}
-        <Route path="/profile" element={<ProfileSettings />} />
+        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+        <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
+        <Route path="/note/:link" element={<ProtectedRoute><NoteView /></ProtectedRoute>} />
       </Routes>
     </>
   )

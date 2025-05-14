@@ -17,6 +17,19 @@ const loginUser = createAsyncThunk('auth/loginUser', async ({ email, password })
     return data;
 })
 
+const loginWithGoogle = createAsyncThunk('auth/loginWithGoogle', async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: { redirectTo: window.location.origin }
+    });
+
+    if (error) {
+        throw new Error(error.message);
+    }
+
+    return data;
+});
+
 const logoutUser = createAsyncThunk('auth/logoutUser', async () => {
     const { error } = await supabase.auth.signOut();
     if (error) {
@@ -41,6 +54,7 @@ const authSlice = createSlice({
         error: null,
     },
     reducers: {
+
     },
     extraReducers: (builder) => {
         builder
@@ -66,6 +80,18 @@ const authSlice = createSlice({
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.loading = false;
+                state.error = "Bilgilerinizi kontrol ediniz.";
+            })
+            .addCase(loginWithGoogle.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(loginWithGoogle.fulfilled, (state, action) => {
+                state.loading = false;
+                state.user = action.payload.user;
+            })
+            .addCase(loginWithGoogle.rejected, (state, action) => {
+                state.loading = false;
                 state.error = action.error.message;
             })
             .addCase(logoutUser.pending, (state) => {
@@ -86,10 +112,10 @@ const authSlice = createSlice({
             })
             .addCase(getUserSession.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message;
+                state.error = ""
             });
     }
 });
 
-export { registerUser, loginUser, logoutUser, getUserSession };
+export { registerUser, loginUser, logoutUser, getUserSession, loginWithGoogle };
 export default authSlice.reducer;

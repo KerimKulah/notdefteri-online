@@ -73,6 +73,16 @@ export const deleteFolder = createAsyncThunk(
     'folder/deleteFolder',
     async (id, { rejectWithValue }) => {
         try {
+            // Önce bu klasöre bağlı notların folder_id'sini null yap
+            const { error: noteUpdateError } = await supabase
+                .from('note')
+                .update({ folder_id: null })
+                .eq('folder_id', id);
+            if (noteUpdateError) {
+                return rejectWithValue(noteUpdateError.message);
+            }
+
+            // Sonra klasörü sil
             const { error } = await supabase
                 .from('folder')
                 .delete()
@@ -86,7 +96,6 @@ export const deleteFolder = createAsyncThunk(
         }
     }
 );
-
 const folderSlice = createSlice({
     name: 'folder',
     initialState: {

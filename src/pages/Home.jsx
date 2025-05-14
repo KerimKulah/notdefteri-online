@@ -5,8 +5,6 @@ import Footerr from '../components/Footerr'
 import NotesContainer from '../components/NotesContainer'
 import NoteModal from '../components/NoteModal'
 import { useState } from 'react';
-import NavBar from '../components/NavBar'
-
 
 function home() {
     const [isModalOpen, setModalOpen] = useState(false);
@@ -35,7 +33,7 @@ function home() {
                 <Sidebar />
                 {/* Main content */}
                 <div className="flex-grow">
-                    <NavBar />
+                    {/* <NavBar /> DAha sonra eklenebilir.*/}
                     <NotesContainer onNoteClick={openEditModal} />
                 </div>
             </div>

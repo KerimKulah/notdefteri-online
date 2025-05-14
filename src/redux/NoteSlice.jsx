@@ -29,14 +29,26 @@ const createNote = createAsyncThunk('note/createNote', async (noteData, { getSta
     }
 });
 
-const getNotes = createAsyncThunk('note/getNotes', async (_, { rejectWithValue }) => {
+const getNotes = createAsyncThunk('note/getNotes', async (_, { getState, rejectWithValue }) => {
     try {
+        // Redux state'den kullanıcı bilgilerini alıyoruz
+        const { auth } = getState();
+        const userId = auth.user?.id;
+
+        if (!userId) {
+            return rejectWithValue('Siteyi kullanmak için lütfen üye olun ya da giriş yapın.');
+        }
+
+        // Kullanıcıya ait notları çekmek için filtreleme yapıyoruz
         const { data, error } = await supabase
             .from('note')
-            .select('*');
+            .select('*')
+            .eq('user_id', userId);
+
         if (error) {
             return rejectWithValue(error.message);
         }
+
         return data;
     } catch (error) {
         return rejectWithValue(error.message);
