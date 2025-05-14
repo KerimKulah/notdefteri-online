@@ -12,13 +12,48 @@ import {
     faCheck
 } from '@fortawesome/free-solid-svg-icons';
 import html2pdf from 'html2pdf.js';
+import { useEffect } from 'react';
+import { supabase } from '../config/supabaseClient';
 
 function NoteView() {
     const { link } = useParams();
     const notes = useSelector(state => state.note.notes);
-    const note = notes.find(n => n.link_id === link);
+    const [note, setNote] = useState(null);
     const contentRef = useRef();
     const [showCopied, setShowCopied] = useState(false);
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+        // Önce store'da var mı bak
+        const found = notes.find(n => n.link_id === link);
+        if (found) {
+            setNote(found);
+            setLoading(false);
+        } else {
+            // Yoksa Supabase'den çek
+            (async () => {
+                setLoading(true);
+                const { data, error } = await supabase
+                    .from('note')
+                    .select('*')
+                    .eq('link_id', link)
+                    .single();
+                setNote(data || null);
+                setLoading(false);
+            })();
+        }
+    }, [link, notes]);
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-[60vh]">
+                <div className="bg-white p-8 rounded-lg shadow text-center">
+                    <p>Yükleniyor...</p>
+                </div>
+            </div>
+        );
+    }
 
     if (!note) {
         return (
