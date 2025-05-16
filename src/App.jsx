@@ -17,7 +17,7 @@ import PublicRoute from './router/PublicRoute';
 
 function App() {
   const dispatch = useDispatch();
-  const { session, loading, initialized } = useSelector((state) => state.auth);
+  const { loading, initialized } = useSelector((state) => state.auth);
 
   useEffect(() => {
     const timer = setTimeout(() => {

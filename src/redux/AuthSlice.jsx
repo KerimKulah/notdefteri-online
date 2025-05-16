@@ -18,7 +18,7 @@ export const loginUser = createAsyncThunk('auth/loginUser', async ({ email, pass
 });
 
 export const loginWithGoogle = createAsyncThunk('auth/loginWithGoogle', async (_, { rejectWithValue }) => {
-    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin } });
+    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.href } });
     if (error) return rejectWithValue(error.message);
     return data;
 });
