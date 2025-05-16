@@ -6,9 +6,9 @@ import NotesContainer from '../components/NotesContainer'
 import NoteModal from '../components/NoteModal'
 import { useState } from 'react';
 
-function home() {
+function Home() {
     const [isModalOpen, setModalOpen] = useState(false);
-    const [selectedNote, setSelectedNote] = useState(null); // null ise yeni not
+    const [selectedNote, setSelectedNote] = useState(null);
 
     const openEmptyModal = () => {
         setSelectedNote(null);
@@ -31,22 +31,15 @@ function home() {
             <Headerr onAddNoteClick={openEmptyModal} />
             <div className="flex flex-grow">
                 <Sidebar />
-                {/* Main content */}
                 <div className="flex-grow">
-                    {/* <NavBar /> DAha sonra eklenebilir.*/}
                     <NotesContainer onNoteClick={openEditModal} />
                 </div>
             </div>
             <Footerr />
 
-            {/* Modal for creating/editing notes */}
             <NoteModal isOpen={isModalOpen} onClose={closeModal} note={selectedNote} />
-
         </div >
-
     )
-
-
 }
 
-export default home
+export default Home
