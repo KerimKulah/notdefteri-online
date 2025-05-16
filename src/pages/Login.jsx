@@ -9,11 +9,7 @@ function Login() {
     const [form, setForm] = useState({ email: '', password: '' });
     const { loading, error } = useSelector((state) => state.auth);
     const [showPassword, setShowPassword] = useState(false);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setForm({ ...form, [name]: value });
-    };
+    const handleChange = (e) => { const { name, value } = e.target; setForm({ ...form, [name]: value }); };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,16 +26,7 @@ function Login() {
     };
 
     const handleGoogleLogin = async () => {
-        try {
-            const res = await dispatch(loginWithGoogle());
-            if (res.meta.requestStatus === 'fulfilled') {
-                navigate('/home');
-            } else {
-                console.error('Google login failed:', res);
-            }
-        } catch (err) {
-            console.error('Unexpected error during login:', err);
-        }
+        await dispatch(loginWithGoogle());
     };
 
     return (

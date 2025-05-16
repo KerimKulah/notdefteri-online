@@ -6,19 +6,43 @@ import Login from './pages/Login';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import NoteView from './pages/NoteView';
-import { getUserSession } from './redux/AuthSlice';
+import { getSession } from './redux/AuthSlice';
 import ProfileSettings from './pages/ProfileSettings';
 import ProtectedRoute from './router/ProtectedRoute';
+import { useSelector } from 'react-redux';
+import { supabase } from './config/supabaseClient';
+import { setSession } from './redux/AuthSlice';
 import PublicRoute from './router/PublicRoute';
 
 
 function App() {
   const dispatch = useDispatch();
+  const { session, loading, initialized } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    dispatch(getUserSession());
+    const timer = setTimeout(() => {
+      dispatch(getSession());
+    }, 500); // 0.5 saniye bekle
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('Auth event:', event);
+      dispatch(setSession(session));
+    });
+
+    return () => {
+      if (authListener && authListener.subscription) {
+        authListener.subscription.unsubscribe();
+      }
+    };
   }, [dispatch]);
 
+  if (loading && !initialized) {
+    return (
+      <div className="spinner-container">
+        <div className="spinner"></div>
+      </div>
+    );
+  }
 
   return (
     <>

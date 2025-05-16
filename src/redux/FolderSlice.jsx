@@ -1,101 +1,43 @@
 import { supabase } from '../config/supabaseClient';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const newFolder = createAsyncThunk(
-    'folder/newFolder',
-    async (folderData, { getState, rejectWithValue }) => {
-        try {
-            const { auth } = getState();
-            const userId = auth.user?.id;
+// id göndermeye gerek var mı? kontrol et
 
-            if (!userId) {
-                return rejectWithValue('User not authenticated');
-            }
+export const newFolder = createAsyncThunk('folder/newFolder', async (folderData, { getState, rejectWithValue }) => {
+    const { auth } = getState();
+    const userId = auth.session.user.id;
+    if (!userId) return rejectWithValue('Kullanıcı oturum açmamış.');
 
-            const folderWithUserId = {
-                ...folderData,
-                user_id: userId,
-            };
+    const folderWithUserId = { ...folderData, user_id: userId };
+    const { data, error } = await supabase.from('folder').insert([folderWithUserId]).select();
 
-            const { data, error } = await supabase
-                .from('folder')
-                .insert([folderWithUserId])
-                .select();
+    if (error) return rejectWithValue(error.message);
+    return data;
+});
 
-            if (error) {
-                return rejectWithValue(error.message);
-            }
-            return data;
-        } catch (error) {
-            return rejectWithValue(error?.message || 'Unknown error occurred');
-        }
-    }
-);
+export const getFolders = createAsyncThunk('folder/getFolders', async (_, { rejectWithValue }) => {
+    const { data, error } = await supabase.from('folder').select('*');
+    if (error) return rejectWithValue(error.message);
+    return data;
+});
 
-export const getFolders = createAsyncThunk(
-    'folder/getFolders',
-    async (_, { rejectWithValue }) => {
-        try {
-            const { data, error } = await supabase
-                .from('folder')
-                .select('*');
-            if (error) {
-                return rejectWithValue(error.message);
-            }
-            return data;
-        } catch (error) {
-            return rejectWithValue(error?.message || 'Unknown error occurred');
-        }
-    }
-);
+export const updateFolder = createAsyncThunk('folder/updateFolder', async ({ id, updates }, { rejectWithValue }) => {
+    const { data, error } = await supabase.from('folder').update(updates).eq('id', id).select();
+    if (error) return rejectWithValue(error.message);
+    return data;
+});
 
-export const updateFolder = createAsyncThunk(
-    'folder/updateFolder',
-    async ({ id, updates }, { rejectWithValue }) => {
-        try {
-            const { data, error } = await supabase
-                .from('folder')
-                .update(updates)
-                .eq('id', id)
-                .select();
-            if (error) {
-                return rejectWithValue(error.message);
-            }
-            return data;
-        } catch (error) {
-            return rejectWithValue(error?.message || 'Unknown error occurred');
-        }
-    }
-);
+export const deleteFolder = createAsyncThunk('folder/deleteFolder', async (id, { rejectWithValue }) => {
+    // Önce bu klasöre bağlı notların folder_id'sini null yap
+    const { error: noteUpdateError } = await supabase.from('note').update({ folder_id: null }).eq('folder_id', id);
+    if (noteUpdateError) return rejectWithValue(noteUpdateError.message);
 
+    // Sonra klasörü sil
+    const { error } = await supabase.from('folder').delete().eq('id', id);
+    if (error) return rejectWithValue(error.message);
+    return id;
+});
 
-export const deleteFolder = createAsyncThunk(
-    'folder/deleteFolder',
-    async (id, { rejectWithValue }) => {
-        try {
-            // Önce bu klasöre bağlı notların folder_id'sini null yap
-            const { error: noteUpdateError } = await supabase
-                .from('note')
-                .update({ folder_id: null })
-                .eq('folder_id', id);
-            if (noteUpdateError) {
-                return rejectWithValue(noteUpdateError.message);
-            }
-
-            // Sonra klasörü sil
-            const { error } = await supabase
-                .from('folder')
-                .delete()
-                .eq('id', id);
-            if (error) {
-                return rejectWithValue(error.message);
-            }
-            return id;
-        } catch (error) {
-            return rejectWithValue(error?.message || 'Unknown error occurred');
-        }
-    }
-);
 const folderSlice = createSlice({
     name: 'folder',
     initialState: {
@@ -125,13 +67,11 @@ const folderSlice = createSlice({
             })
             .addCase(newFolder.fulfilled, (state, action) => {
                 state.loading = false;
-                if (action.payload?.[0]) {
-                    state.folders.unshift(action.payload[0]);
-                }
+                if (action.payload?.[0]) state.folders.unshift(action.payload[0]);
             })
             .addCase(newFolder.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.payload || action.error.message;
             })
             .addCase(getFolders.pending, (state) => {
                 state.loading = true;
@@ -142,26 +82,24 @@ const folderSlice = createSlice({
             })
             .addCase(getFolders.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.payload || action.error.message;
             })
             .addCase(updateFolder.fulfilled, (state, action) => {
                 const updated = action.payload?.[0];
                 if (updated) {
                     const index = state.folders.findIndex(f => f.id === updated.id);
-                    if (index !== -1) {
-                        state.folders[index] = updated;
-                    }
+                    if (index !== -1) state.folders[index] = updated;
                 }
             })
             .addCase(updateFolder.rejected, (state, action) => {
-                state.error = action.payload;
+                state.error = action.payload || action.error.message;
             })
             .addCase(deleteFolder.fulfilled, (state, action) => {
                 const deletedId = action.payload;
                 state.folders = state.folders.filter(f => f.id !== deletedId);
             })
             .addCase(deleteFolder.rejected, (state, action) => {
-                state.error = action.payload;
+                state.error = action.payload || action.error.message;
             });
     },
 });

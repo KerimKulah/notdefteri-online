@@ -3,68 +3,43 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 
 // Email değiştirme
-export const updateEmail = createAsyncThunk(
-    'profile/updateEmail',
-    async ({ email, password }, { rejectWithValue }) => {
-        try {
-            // Kullanıcıyı çek
-            const { data, error: userError } = await supabase.auth.getUser();
-            if (userError) throw new Error('Kullanıcı alınamadı');
-            const currentEmail = data.user.email;
+export const updateEmail = createAsyncThunk('profile/updateEmail', async ({ email, password }, { getState, rejectWithValue }) => {
 
-            // Önce şifreyi doğrula
-            const { error: signInError } = await supabase.auth.signInWithPassword({
-                email: currentEmail,
-                password
-            });
+    // Önce maili alalım
+    const { auth } = getState();
+    const user = auth.session?.user;
+    if (!user) return rejectWithValue('Kullanıcı oturum açmamış.');
+    const currentEmail = user.email;
 
-            if (signInError) throw new Error('Mevcut şifre yanlış');
+    // şifreyi doğrula
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email: currentEmail, password });
+    if (signInError) return rejectWithValue('Mevcut şifre yanlış');
 
-            // Email güncelle
-            const { error: updateError } = await supabase.auth.updateUser({
-                email: email
-            });
-
-            if (updateError) throw new Error(updateError.message);
-
-            return { email };
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
+    // Email güncelle
+    const { error: updateError } = await supabase.auth.updateUser({ email: email });
+    if (updateError) return rejectWithValue(updateError.message);
+    return { email, message: 'E-posta başarıyla güncellendi. Lütfen onayla.' };
+});
 
 // Şifre değiştirme
-export const updatePassword = createAsyncThunk(
-    'profile/updatePassword',
-    async ({ currentPassword, newPassword }, { rejectWithValue }) => {
-        try {
-            // Kullanıcıyı çek
-            const { data, error: userError } = await supabase.auth.getUser();
-            if (userError) throw new Error('Kullanıcı alınamadı');
-            const currentEmail = data.user.email;
+export const updatePassword = createAsyncThunk('profile/updatePassword', async ({ currentPassword, newPassword }, { getState, rejectWithValue }) => {
 
-            // Önce mevcut şifreyi doğrula
-            const { error: signInError } = await supabase.auth.signInWithPassword({
-                email: currentEmail,
-                password: currentPassword
-            });
+    // Önce maili alalım
+    const { auth } = getState();
+    console.log("getState().auth", getState().auth);
+    const user = auth.session?.user;
+    if (!user) return rejectWithValue('Kullanıcı oturum açmamış.');
+    const currentEmail = user.email;
 
-            if (signInError) throw new Error('Mevcut şifre yanlış');
+    // Önce mevcut şifreyi doğrula
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email: currentEmail, password: currentPassword });
+    if (signInError) return rejectWithValue('Mevcut şifre yanlış');
 
-            // Şifreyi güncelle
-            const { error: updateError } = await supabase.auth.updateUser({
-                password: newPassword
-            });
-
-            if (updateError) throw new Error(updateError.message);
-
-            return true;
-        } catch (error) {
-            return rejectWithValue(error.message);
-        }
-    }
-);
+    // Şifreyi güncelle
+    const { error: updateError } = await supabase.auth.updateUser({ password: newPassword });
+    if (updateError) return rejectWithValue(updateError.message);
+    return true;
+});
 
 const profileSlice = createSlice({
     name: 'profile',
@@ -88,12 +63,12 @@ const profileSlice = createSlice({
             })
             .addCase(updateEmail.fulfilled, (state) => {
                 state.loading = false;
-                state.success = 'Lütfen hem eski hem de yeni e-posta adresinize gelen onay bağlantılarına tıklayarak işlemi tamamlayın.';
+                state.success = 'Lütfen e-posta adresinize gelen onay bağlantısınaa tıklayarak işlemi tamamlayın.';
 
             })
             .addCase(updateEmail.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.payload || action.error.message;
             })
             .addCase(updatePassword.pending, (state) => {
                 state.loading = true;
@@ -106,7 +81,7 @@ const profileSlice = createSlice({
             })
             .addCase(updatePassword.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.payload;
+                state.error = action.payload || action.error.message;
             });
     }
 });

@@ -40,7 +40,7 @@ function AlertIcon() {
 function ProfileSettings() {
     const dispatch = useDispatch();
     const { loading, error, success } = useSelector(state => state.profile);
-    const user = useSelector(state => state.auth.user);
+    const session = useSelector(state => state.auth.session);
 
     const [emailForm, setEmailForm] = useState({
         email: '',
@@ -108,7 +108,7 @@ function ProfileSettings() {
                         </div>
                         <div>
                             <p className="text-sm text-gray-500">Mevcut E-posta</p>
-                            <p className="font-medium">{user?.email}</p>
+                            <p className="font-medium">{session?.user.email}</p>
                         </div>
                     </div>
                 </div>
@@ -198,8 +198,8 @@ function ProfileSettings() {
                                     value={passwordForm.confirmPassword}
                                     onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
                                     className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 ${passwordForm.confirmPassword && !passwordMatch
-                                            ? 'border-red-500 bg-red-50'
-                                            : 'border-gray-300'
+                                        ? 'border-red-500 bg-red-50'
+                                        : 'border-gray-300'
                                         }`}
                                     placeholder="••••••••"
                                     required

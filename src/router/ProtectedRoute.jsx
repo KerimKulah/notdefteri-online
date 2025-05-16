@@ -3,18 +3,10 @@ import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 function ProtectedRoute({ children }) {
-    const { user, loading } = useSelector((state) => state.auth);
+    const { session } = useSelector((state) => state.auth);
 
-    if (loading) {
-        return (
-            <div className="spinner-container">
-                <div className="spinner"></div>
-            </div>
-        );
-    }
-
-    if (!user) {
-        return <Navigate to="/login" />;
+    if (!session) {
+        return <Navigate to="/login" replace />;
     }
 
     return children;
