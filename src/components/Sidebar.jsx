@@ -8,23 +8,21 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const iconColorClasses = {
     red: 'text-red-500',
-    blue: 'text-blue-500',
+    blue: 'text-indigo-600',
     green: 'text-green-500',
-    yellow: 'text-yellow-400',
+    yellow: 'text-yellow-200',
     gray: 'text-gray-500',
     purple: 'text-purple-500',
 };
 
 const colorClasses = {
     red: 'bg-red-500',
-    blue: 'bg-blue-500',
+    blue: 'bg-indigo-500',
     green: 'bg-green-500',
-    yellow: 'bg-yellow-500',
+    yellow: 'bg-yellow-200',
     gray: 'bg-gray-500',
     purple: 'bg-purple-500',
 };
-
-
 
 function Sidebar() {
     const dispatch = useDispatch();
@@ -33,7 +31,6 @@ function Sidebar() {
     const favoriteNotes = useSelector((state) => state.note.favoriteNotes);
     const selectedFolder = useSelector((state) => state.folder.selectedFolder);
     const filter = useSelector((state) => state.folder.filter);
-
     const [editingFolderId, setEditingFolderId] = useState(null);
     const [colorPickerId, setColorPickerId] = useState(null);
 
@@ -44,7 +41,6 @@ function Sidebar() {
     useEffect(() => {
         if (colorPickerId !== null) {
             const handleClick = (e) => {
-                // Renk seçiciye tıklanırsa kapanmasın
                 const colorPicker = document.getElementById(`color-picker-${colorPickerId}`);
                 if (colorPicker && colorPicker.contains(e.target)) return;
                 setColorPickerId(null);
@@ -81,17 +77,11 @@ function Sidebar() {
                     <div className="flex justify-end gap-3">
                         <button
                             className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
-                            onClick={onClose}
-                        >
+                            onClick={onClose}>
                             İptal
                         </button>
-                        <button
-                            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
-                            onClick={() => {
-                                dispatch(deleteFolder(id));
-                                onClose();
-                            }}
-                        >
+                        <button className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors"
+                            onClick={() => { dispatch(deleteFolder(id)); onClose(); }}>
                             Sil
                         </button>
                     </div>
@@ -109,8 +99,7 @@ function Sidebar() {
                 <h2 className="font-bold text-lg">Klasörler</h2>
                 <button
                     onClick={handleNewFolder}
-                    className="w-8 h-8 flex items-center justify-center text-cyan-600 hover:bg-cyan-50 rounded-lg transition-colors"
-                >
+                    className="w-8 h-8 flex items-center justify-center text-indigo-600 hover:bg-gray-100 rounded-lg transition-colors">
                     <FontAwesomeIcon icon={faFolderPlus} />
                 </button>
             </div>
@@ -119,13 +108,12 @@ function Sidebar() {
                 <button
                     onClick={() => dispatch(setFilter('all'))}
                     className={`flex items-center w-full p-2.5 rounded-lg transition-colors ${filter === 'all'
-                        ? 'bg-cyan-100 text-cyan-900'
+                        ? 'bg-indigo-600 text-white'
                         : 'hover:bg-gray-100 text-gray-700'
-                        }`}
-                >
+                        }`}>
                     <FontAwesomeIcon icon={faLayerGroup} className="w-4 h-4" />
                     <span className="ml-2 flex-1">Tüm Notlar</span>
-                    <span className="bg-cyan-200 text-cyan-800 px-2 py-0.5 rounded-md text-xs font-medium min-w-[1.5rem] text-center">
+                    <span className="bg-indigo-600 text-white px-2 py-0.5 rounded-md text-xs font-medium min-w-[1.5rem] text-center">
                         {notes.length}
                     </span>
                 </button>
@@ -133,13 +121,12 @@ function Sidebar() {
                 <button
                     onClick={() => dispatch(setFilter('favorite'))}
                     className={`flex items-center w-full p-2.5 rounded-lg transition-colors ${filter === 'favorite'
-                        ? 'bg-yellow-100 text-yellow-900'
+                        ? 'bg-yellow-200 text-black'
                         : 'hover:bg-gray-100 text-gray-700'
-                        }`}
-                >
+                        }`}>
                     <FontAwesomeIcon icon={faStar} className="w-4 h-4" />
                     <span className="ml-2 flex-1">Favoriler</span>
-                    <span className="bg-yellow-200 text-yellow-800 px-2 py-0.5 rounded-md text-xs font-medium min-w-[1.5rem] text-center">
+                    <span className="bg-yellow-200 text-black px-2 py-0.5 rounded-md text-xs font-medium min-w-[1.5rem] text-center">
                         {favoriteNotes.length}
                     </span>
                 </button>
@@ -157,42 +144,26 @@ function Sidebar() {
                         </li>
                     ) : (
                         folders.map((folder) => (
-                            <li
-                                key={folder.id}
-                                onClick={() => dispatch(setSelectedFolder(folder))}
+                            <li key={folder.id} onClick={() => dispatch(setSelectedFolder(folder))}
                                 className={`rounded-lg cursor-pointer transition-colors ${selectedFolder?.id === folder.id
-                                    ? 'bg-gray-100'
-                                    : 'hover:bg-gray-50'
-                                    }`}
-                            >
+                                    ? 'bg-gray-200'
+                                    : 'hover:bg-gray-100'
+                                    }`}>
                                 <div className="p-2 flex items-center">
-                                    <span
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setColorPickerId(folder.id);
-                                        }}
-                                        className="flex-shrink-0 w-5 h-5 flex items-center justify-center"
-                                    >
-                                        <FontAwesomeIcon
-                                            icon={faFolder}
-                                            className={`${iconColorClasses[folder.color]} text-base`}
-                                        />
+                                    <span onClick={(e) => { e.stopPropagation(); setColorPickerId(folder.id) }}
+                                        className="flex-shrink-0 w-5 h-5 flex items-center justify-center">
+                                        <FontAwesomeIcon icon={faFolder} className={`${iconColorClasses[folder.color]} text-base`} />
                                     </span>
 
                                     <div className="ml-2 flex-1 min-w-0 flex items-center">
                                         {editingFolderId === folder.id ? (
-                                            <input
-                                                autoFocus
-                                                type="text"
-                                                className="w-full px-2 py-1 text-sm border rounded bg-white"
+                                            <input autoFocus type="text" className="w-full px-2 py-1 text-sm border rounded bg-white"
                                                 defaultValue={folder.name}
                                                 placeholder="Klasör adı..."
                                                 onClick={e => e.stopPropagation()}
                                                 onBlur={e => handleNameChange(folder.id, e.target.value)}
                                                 onKeyDown={e => {
-                                                    if (e.key === 'Enter') {
-                                                        handleNameChange(folder.id, e.target.value);
-                                                    }
+                                                    if (e.key === 'Enter') handleNameChange(folder.id, e.target.value);
                                                 }}
                                             />
                                         ) : (
@@ -201,25 +172,14 @@ function Sidebar() {
                                                     {folder.name}
                                                 </span>
                                                 <div className="ml-auto flex items-center gap-1.5">
-                                                    <span className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs min-w-[1.25rem] text-center">
+                                                    <span className="bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded text-xs min-w-[1.25rem] text-center">
                                                         {getFolderNoteCount(folder.id)}
                                                     </span>
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            setEditingFolderId(folder.id);
-                                                        }}
-                                                        className="p-1 text-gray-400 hover:text-gray-600 rounded transition-colors"
-                                                    >
+                                                    <button onClick={(e) => { e.stopPropagation(); setEditingFolderId(folder.id) }}
+                                                        className="p-1 text-gray-400 hover:text-gray-600 rounded transition-colors">
                                                         <FontAwesomeIcon icon={faPen} className="w-3 h-3" />
                                                     </button>
-                                                    <button
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            handleDeleteFolder(folder.id);
-                                                        }}
-                                                        className="p-1 text-gray-400 hover:text-red-500 rounded transition-colors"
-                                                    >
+                                                    <button onClick={(e) => { e.stopPropagation(); handleDeleteFolder(folder.id) }} className="p-1 text-gray-400 hover:text-red-500 rounded transition-colors">
                                                         <FontAwesomeIcon icon={faTrash} className="w-3 h-3" />
                                                     </button>
                                                 </div>
@@ -229,21 +189,17 @@ function Sidebar() {
                                 </div>
 
                                 {colorPickerId === folder.id && (
-                                    <div
-                                        id={`color-picker-${folder.id}`}
+                                    <div id={`color-picker-${folder.id}`}
                                         className="flex gap-2 p-2 pl-7"
-                                        onClick={e => e.stopPropagation()}
-                                    >
+                                        onClick={e => e.stopPropagation()}>
                                         {Object.keys(colorClasses).map((color) => (
-                                            <button
-                                                key={color}
+                                            <button key={color}
                                                 onClick={() => handleColorChange(folder.id, color)}
                                                 className={`w-4 h-4 rounded-full ${colorClasses[color]} 
                     ${folder.color === color
                                                         ? 'ring-2 ring-offset-2 ring-gray-400'
                                                         : 'hover:ring-2 hover:ring-offset-2 hover:ring-gray-200'
-                                                    } transition-all`}
-                                            />
+                                                    } transition-all`} />
                                         ))}
                                     </div>
                                 )}
