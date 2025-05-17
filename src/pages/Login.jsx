@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginUser, loginWithGoogle } from '../redux/AuthSlice';
+import { Link } from 'react-router-dom';
 
 function Login() {
     const dispatch = useDispatch();
@@ -30,15 +31,15 @@ function Login() {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="flex items-center justify-center min-h-screen bg-gray-50">
             <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold text-gray-800">Giriş Yap</h2>
                     <div className="mt-3 text-sm text-gray-600">
                         Hesabınız yok mu?{' '}
-                        <a href="/register" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">
+                        <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">
                             Kayıt Ol
-                        </a>
+                        </Link>
                     </div>
                 </div>
 
@@ -123,9 +124,10 @@ function Login() {
                         </div>
 
                         <div className="text-sm">
-                            <a href="/forgot-password" className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">
+                            <Link to="/forgot-password"
+                                className="font-medium text-indigo-600 hover:text-indigo-500 transition-colors duration-200">
                                 Şifremi Unuttum
-                            </a>
+                            </Link>
                         </div>
                     </div>
 

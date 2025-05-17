@@ -32,8 +32,10 @@ const NoteModal = ({ isOpen, onClose, note }) => {
     const [formData, setFormData] = useState(INITIAL_FORM_STATE);
 
     useEffect(() => {
-        setFormData(note || INITIAL_FORM_STATE);
-    }, [note]);
+        if (isOpen) {
+            setFormData(note || INITIAL_FORM_STATE);
+        }
+    }, [isOpen, note]);
 
     const handleInputChange = useCallback((field, value) => {
         setFormData(prev => ({ ...prev, [field]: value }));

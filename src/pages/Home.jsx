@@ -9,6 +9,7 @@ import { useState } from 'react';
 function Home() {
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const openEmptyModal = () => {
         setSelectedNote(null);
@@ -28,15 +29,14 @@ function Home() {
 
     return (
         <div className='bg-gray-50 text-gray-900s transition-all duration-300 min-h-screen flex flex-col'>
-            <Headerr onAddNoteClick={openEmptyModal} />
+            <Headerr onAddNoteClick={openEmptyModal} onSearch={setSearchQuery} />
             <div className="flex flex-grow">
                 <Sidebar />
                 <div className="flex-grow">
-                    <NotesContainer onNoteClick={openEditModal} />
+                    <NotesContainer onNoteClick={openEditModal} searchQuery={searchQuery} />
                 </div>
             </div>
             <Footerr />
-
             <NoteModal isOpen={isModalOpen} onClose={closeModal} note={selectedNote} />
         </div >
     )

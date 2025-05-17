@@ -13,6 +13,8 @@ import { useSelector } from 'react-redux';
 import { supabase } from './config/supabaseClient';
 import { setSession } from './redux/AuthSlice';
 import PublicRoute from './router/PublicRoute';
+import ResetPassword from './pages/ResetPassword';
+import ForgotPassword from './pages/ForgotPassword';
 
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       dispatch(getSession());
-    }, 500); // 0.5 saniye bekle
+    }, 500);
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       console.log('Auth event:', event);
@@ -47,6 +49,8 @@ function App() {
   return (
     <>
       <Routes>
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />

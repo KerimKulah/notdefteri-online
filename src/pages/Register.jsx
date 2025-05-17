@@ -98,7 +98,7 @@ function Register() {
 
     if (registrationSuccess) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+            <div className="flex items-center justify-center min-h-screen bg-gray-50">
                 <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg transition-all duration-300">
                     <div className="text-center">
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
@@ -137,7 +137,7 @@ function Register() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="flex items-center justify-center min-h-screen bg-gray-50">
             <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
                 <div className="text-center">
                     <h2 className="text-3xl font-bold text-gray-800">Kayıt Ol</h2>

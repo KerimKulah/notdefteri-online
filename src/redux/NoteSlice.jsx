@@ -85,7 +85,7 @@ const noteSlice = createSlice({
             })
             .addCase(updateNote.fulfilled, (state, action) => {
                 state.loading = false;
-                const updatedNote = action.payload[0];
+                const updatedNote = action.payload;
                 if (updatedNote) {
                     const index = state.notes.findIndex(note => note.id === updatedNote.id);
                     if (index !== -1) state.notes[index] = updatedNote;

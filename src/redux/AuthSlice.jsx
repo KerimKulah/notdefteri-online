@@ -35,6 +35,14 @@ export const getSession = createAsyncThunk('auth/getSession', async (_, { reject
     return data.session;
 });
 
+export const resetPassword = createAsyncThunk('auth/resetPassword', async ({ email }, { rejectWithValue }) => {
+    const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: `${window.location.origin}/reset-password` })
+    if (error) {
+        const translatedMessage = translateSupabaseError(error.message);
+        return rejectWithValue(translatedMessage);
+    }
+});
+
 const authSlice = createSlice({
     name: 'auth',
     initialState: {

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://notdefteri.online/sitemap.xml

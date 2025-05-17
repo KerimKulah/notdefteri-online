@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getNotes } from '../redux/NoteSlice';
 import NoteCard from './NoteCard';
 
-function NotesContainer({ onNoteClick }) {
+function NotesContainer({ onNoteClick, searchQuery }) {
     const dispatch = useDispatch();
     const { notes, loading, error } = useSelector((state) => state.note);
     const { selectedFolder, filter } = useSelector((state) => state.folder);
@@ -13,12 +13,20 @@ function NotesContainer({ onNoteClick }) {
         dispatch(getNotes());
     }, [dispatch]);
 
+    // NOTLARI FİLTRELE
     let filteredNotes = notes;
-    if (filter === 'favorite') {
-        filteredNotes = notes.filter(note => note.is_favorite);
-    } else if (filter === 'folder' && selectedFolder) {
-        filteredNotes = notes.filter(note => note.folder_id === selectedFolder.id);
+    if (filter === 'favorite') filteredNotes = notes.filter(note => note.is_favorite);
+    else if (filter === 'folder' && selectedFolder) filteredNotes = notes.filter(note => note.folder_id === selectedFolder.id);
+
+    // NOTLARI ARAMA SORUSUNA GÖRE FİLTRELE
+    if (searchQuery.trim() !== '') {
+        const q = searchQuery.trim().toLowerCase();
+        filteredNotes = filteredNotes.filter(note =>
+            (note.title && note.title.toLowerCase().includes(q)) ||
+            (note.content && note.content.toLowerCase().includes(q))
+        );
     }
+
 
     if (loading) {
         return (
