@@ -10,6 +10,8 @@ function Home() {
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedNote, setSelectedNote] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
 
     const openEmptyModal = () => {
         setSelectedNote(null);
@@ -29,9 +31,9 @@ function Home() {
 
     return (
         <div className='bg-gray-50 text-gray-900s transition-all duration-300 min-h-screen flex flex-col'>
-            <Headerr onAddNoteClick={openEmptyModal} onSearch={setSearchQuery} />
+            <Headerr onAddNoteClick={openEmptyModal} onSearch={setSearchQuery} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
             <div className="flex flex-grow">
-                <Sidebar />
+                <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
                 <div className="flex-grow">
                     <NotesContainer onNoteClick={openEditModal} searchQuery={searchQuery} />
                 </div>
