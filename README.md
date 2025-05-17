@@ -1,19 +1,21 @@
-# 📝 notdefteri.online
+# 📝 NOTDEFTERI.ONLINE
 
-Bu proje, **online not alma** deneyimini sade, hızlı ve modern hale getirmek için geliştirilmektedir.
+**Basit. Hızlı. Paylaşılabilir.**  
+Notlarınızı saniyeler içinde oluşturun, düzenleyin ve paylaşın.  
+✅ Şu anda aktif: [https://notdefteri.online](https://notdefteri.online)
 
-## 🖼️ Demo
+---
 
-![image](https://github.com/user-attachments/assets/e7c251c7-dae1-4a11-a94b-749e3b635901)
+## 🖼️ Görüntüler
+![image](https://github.com/user-attachments/assets/f23219f8-d0fc-47f0-b32d-3d34be7b2f0f)
 
 
-## 🚧 Durum
 
-**http://notdefteri.online** şu anda **aktif olarak geliştirme aşamasındadır**.  
+---
 
-## 🛠️ Kullanılan Teknolojiler
+## ⚙️ Kullanılan Teknolojiler
 
-- **React.js** – Arayüz
-- **Tailwind CSS** – Stil
-- **Redux Toolkit** – Durum yönetimi
-- **Supabase** – Veritabanı, kimlik doğrulama ve API
+- **React.js** – Arayüz geliştirme
+- **Tailwind CSS** – Modern ve esnek stillendirme
+- **Redux Toolkit** – Global durum yönetimi
+- **Supabase** – Veritabanı, kimlik doğrulama ve API yönetimi
