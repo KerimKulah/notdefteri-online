@@ -84,7 +84,7 @@ const NoteCard = memo(({ note, onClick }) => {
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 sm:gap-0 mt-auto">
                 <span className="text-xs text-gray-400 flex items-center">
                     <FontAwesomeIcon icon={faClock} className="mr-1" />
-                    <span className="truncate">Son değişiklik: {getTimeAgo(note.updated_at)}</span>
+                    <span className="truncate">{getTimeAgo(note.updated_at)}</span>
                 </span>
 
                 <div className="flex items-center gap-2 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
