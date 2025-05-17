@@ -6,7 +6,7 @@ function PublicRoute({ children }) {
     const { session } = useSelector((state) => state.auth);
 
     if (session) {
-        return <Navigate to="/" />;
+        return <Navigate to="/home" />;
     }
 
     return children;

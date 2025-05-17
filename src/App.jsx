@@ -15,6 +15,7 @@ import { setSession } from './redux/AuthSlice';
 import PublicRoute from './router/PublicRoute';
 import ResetPassword from './pages/ResetPassword';
 import ForgotPassword from './pages/ForgotPassword';
+import Landing from './pages/Landing';
 
 
 function App() {
@@ -51,7 +52,7 @@ function App() {
         <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
         <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
         <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
         <Route path="/note/:link" element={<NoteView />} />
