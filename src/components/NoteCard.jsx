@@ -75,8 +75,7 @@ const NoteCard = memo(({ note, onClick }) => {
     return (
         <div
             onClick={onClick}
-            className="group h-[230px] bg-white rounded-xl shadow-sm hover:shadow-md p-5 transition-all duration-300 border border-gray-100 hover:border-gray-200 cursor-pointer flex flex-col"
-        >
+            className="hover:scale-105 group h-[230px] bg-white rounded-xl shadow-sm hover:shadow-md p-5 transition-all duration-300 border border-gray-100 hover:border-gray-200 cursor-pointer flex flex-col">
             <div className="flex justify-between items-start mb-3">
                 <h5 className="font-semibold text-gray-800 text-lg truncate pr-3 flex-1">
                     {note.title}
@@ -100,8 +99,7 @@ const NoteCard = memo(({ note, onClick }) => {
                 <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
                         onClick={handleShare}
-                        className="p-1.5 rounded-lg bg-cyan-50 text-cyan-600 hover:bg-cyan-100 transition-colors relative group/tooltip"
-                    >
+                        className="hover:scale-105 p-1.5 rounded-lg bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-colors relative group/tooltip">
                         <FontAwesomeIcon icon={faShare} />
                         <span className="invisible group-hover/tooltip:visible absolute -top-8 left-1/2 -translate-x-1/2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1">
                             Notu Paylaş
@@ -109,8 +107,7 @@ const NoteCard = memo(({ note, onClick }) => {
                     </button>
                     <button
                         onClick={(e) => onDelete(e, note.id)}
-                        className="p-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-100 transition-colors relative group/tooltip"
-                    >
+                        className="hover:scale-105 p-1.5 rounded-lg bg-red-50 text-red-500 hover:bg-red-100 transition-colors relative group/tooltip">
                         <FontAwesomeIcon icon={faTrash} />
                         <span className="invisible group-hover/tooltip:visible absolute -top-8 left-1/2 -translate-x-1/2 w-max bg-gray-800 text-white text-xs rounded px-2 py-1">
                             Notu Sil

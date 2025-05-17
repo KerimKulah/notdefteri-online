@@ -121,7 +121,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
                                     onClick={() => handleToggle('is_private')}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:scale-105 
                                         ${formData.is_private
-                                            ? 'bg-purple-100 text-purple-700 hover:bg-purple-200'
+                                            ? 'bg-purple-200 text-black'
                                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                                 >
                                     <FontAwesomeIcon icon={faLock} />
@@ -132,7 +132,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
                                     onClick={() => handleToggle('is_favorite')}
                                     className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:scale-105
                                         ${formData.is_favorite
-                                            ? 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200'
+                                            ? 'bg-yellow-200 text-black'
                                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                                 >
                                     <FontAwesomeIcon icon={faStar} />
@@ -141,7 +141,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
 
                                 <button
                                     onClick={handleSubmit}
-                                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all hover:scale-105 focus:ring-2 focus:ring-blue-400"
+                                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-800 transition-all hover:scale-105 focus:ring-2 focus:ring-blue-400"
                                 >
                                     {note ? 'Güncelle' : 'Kaydet'}
                                 </button>

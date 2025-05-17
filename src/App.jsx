@@ -22,9 +22,7 @@ function App() {
   const { loading, initialized } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      dispatch(getSession());
-    }, 500);
+    dispatch(getSession());
 
     const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
       console.log('Auth event:', event);
@@ -56,7 +54,7 @@ function App() {
         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
-        <Route path="/note/:link" element={<ProtectedRoute><NoteView /></ProtectedRoute>} />
+        <Route path="/note/:link" element={<NoteView />} />
       </Routes>
     </>
   )

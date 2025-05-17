@@ -43,7 +43,7 @@ function Headerr({ onAddNoteClick, onSearch }) {
                 <div className="flex items-center space-x-2">
                     <button
                         onClick={onAddNoteClick}
-                        className="px-3 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-800 text-white flex items-center gap-2 transition-all">
+                        className="hover:scale-105 px-3 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-800 text-white flex items-center gap-2 transition-all">
                         <FontAwesomeIcon icon={faPlus} />
                         <span>Not Ekle</span>
                     </button>
@@ -51,7 +51,7 @@ function Headerr({ onAddNoteClick, onSearch }) {
                     <div className="relative">
                         <button
                             onClick={toggleSearch}
-                            className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-all">
+                            className="hover:scale-105 p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-all">
                             <FontAwesomeIcon
                                 icon={faSearch}
                                 className="text-gray-600"
@@ -62,7 +62,7 @@ function Headerr({ onAddNoteClick, onSearch }) {
                                 <div className="relative">
                                     <input
                                         type="text"
-                                        className="w-full px-4 py-2 rounded-xl bg-white/60 backdrop-blur-md shadow-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition-all duration-300"
+                                        className="hover:scale-105 w-full px-4 py-2 rounded-xl bg-white/60 backdrop-blur-md shadow-2xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent transition-all duration-300"
                                         placeholder="Not arayın..."
                                         onInput={searchNotes}
                                         autoFocus
@@ -85,7 +85,7 @@ function Headerr({ onAddNoteClick, onSearch }) {
 
                     <button
                         onClick={toggleSettings}
-                        className="p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-all">
+                        className="hover:scale-105 p-2 rounded-lg bg-gray-200 hover:bg-gray-300 transition-all">
                         <FontAwesomeIcon
                             icon={faCog}
                             className="text-gray-600" />
@@ -95,7 +95,7 @@ function Headerr({ onAddNoteClick, onSearch }) {
                         <div className="absolute right-0 mt-2 w-56 bg-white shadow-lg rounded-lg z-20 overflow-hidden animate__animated animate__fadeIn">
                             <button
                                 onClick={toggleDarkMode}
-                                className="flex items-center w-full text-left px-4 py-3 hover:bg-gray-100 transition-all">
+                                className="hover:scale-105 flex items-center w-full text-left px-4 py-3 hover:bg-gray-100 transition-all">
                                 <FontAwesomeIcon
                                     icon={faMoon}
                                     className="mr-3 text-primary-500"
@@ -107,13 +107,13 @@ function Headerr({ onAddNoteClick, onSearch }) {
                                     navigate('/profile');
                                     setShowSettings(false);
                                 }}
-                                className="flex items-center w-full text-left px-4 py-3 hover:bg-gray-100 transition-all">
+                                className="hover:scale-105 flex items-center w-full text-left px-4 py-3 hover:bg-gray-100 transition-all">
                                 <FontAwesomeIcon
                                     icon={faUser}
                                     className="mr-3 text-primary-500" />
                                 <span>Profil Ayarları</span>
                             </button>
-                            <button onClick={handleLogout} className="flex items-center w-full text-left px-4 py-3 hover:bg-gray-100 transition-all border-t ">
+                            <button onClick={handleLogout} className="hover:scale-105 flex items-center w-full text-left px-4 py-3 hover:bg-gray-100 transition-all border-t ">
                                 <FontAwesomeIcon icon={faSignOutAlt} className="mr-3 text-red-500" />
                                 <span>Çıkış Yap</span>
                             </button>

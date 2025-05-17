@@ -106,22 +106,20 @@ function NoteView() {
                         <div className="flex flex-wrap items-center gap-2">
                             <button
                                 onClick={handleShare}
-                                className="flex items-center gap-1 px-3 py-1.5 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 rounded-lg transition text-sm"
-                            >
+                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-lg transition text-sm">
                                 <FontAwesomeIcon icon={showCopied ? faCheck : faLink} />
                                 {showCopied ? 'Kopyalandı!' : 'Paylaş'}
                             </button>
                             <button
                                 onClick={handlePdf}
-                                className="flex items-center gap-1 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 rounded-lg transition text-sm"
+                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition text-sm"
                             >
                                 <FontAwesomeIcon icon={faFilePdf} />
                                 PDF
                             </button>
                             <button
                                 onClick={handlePrint}
-                                className="flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition text-sm"
-                            >
+                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition text-sm">
                                 <FontAwesomeIcon icon={faPrint} />
                                 Yazdır
                             </button>

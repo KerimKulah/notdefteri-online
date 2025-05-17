@@ -99,7 +99,7 @@ function Sidebar() {
                 <h2 className="font-bold text-lg">Klasörler</h2>
                 <button
                     onClick={handleNewFolder}
-                    className="w-8 h-8 flex items-center justify-center text-indigo-600 hover:bg-gray-100 rounded-lg transition-colors">
+                    className="hover:scale-105 hover:text-indigo-800 w-8 h-8 flex items-center justify-center text-indigo-600 rounded-lg transition-colors">
                     <FontAwesomeIcon icon={faFolderPlus} />
                 </button>
             </div>
@@ -107,7 +107,7 @@ function Sidebar() {
             <div className="space-y-2 mb-4">
                 <button
                     onClick={() => dispatch(setFilter('all'))}
-                    className={`flex items-center w-full p-2.5 rounded-lg transition-colors ${filter === 'all'
+                    className={`hover:scale-105 flex items-center w-full p-2.5 rounded-lg transition-colors ${filter === 'all'
                         ? 'bg-indigo-600 text-white'
                         : 'hover:bg-gray-100 text-gray-700'
                         }`}>
@@ -120,7 +120,7 @@ function Sidebar() {
 
                 <button
                     onClick={() => dispatch(setFilter('favorite'))}
-                    className={`flex items-center w-full p-2.5 rounded-lg transition-colors ${filter === 'favorite'
+                    className={`hover:scale-105 flex items-center w-full p-2.5 rounded-lg transition-colors ${filter === 'favorite'
                         ? 'bg-yellow-200 text-black'
                         : 'hover:bg-gray-100 text-gray-700'
                         }`}>
@@ -145,7 +145,7 @@ function Sidebar() {
                     ) : (
                         folders.map((folder) => (
                             <li key={folder.id} onClick={() => dispatch(setSelectedFolder(folder))}
-                                className={`rounded-lg cursor-pointer transition-colors ${selectedFolder?.id === folder.id
+                                className={`hover:scale-105 rounded-lg cursor-pointer transition-colors ${selectedFolder?.id === folder.id
                                     ? 'bg-gray-200'
                                     : 'hover:bg-gray-100'
                                     }`}>
