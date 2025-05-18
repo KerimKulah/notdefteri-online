@@ -173,3 +173,60 @@
         transform: rotate(360deg);
     }
 }
+
+
+/* Quill px font-size desteği */
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="12px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before {
+    content: '12px';
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="14px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before {
+    content: '14px';
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="16px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before {
+    content: '16px';
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="18px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before {
+    content: '18px';
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="24px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="24px"]::before {
+    content: '24px';
+}
+
+.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="32px"]::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item[data-value="32px"]::before {
+    content: '32px';
+}
+
+/* Asıl font-size uygulaması */
+.ql-size-12px {
+    font-size: 12px;
+}
+
+.ql-size-14px {
+    font-size: 14px;
+}
+
+.ql-size-16px {
+    font-size: 16px;
+}
+
+.ql-size-18px {
+    font-size: 18px;
+}
+
+.ql-size-24px {
+    font-size: 24px;
+}
+
+.ql-size-32px {
+    font-size: 32px;
+}

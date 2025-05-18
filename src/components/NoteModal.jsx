@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createNote, updateNote } from '../redux/NoteSlice';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faLock, faStar } from '@fortawesome/free-solid-svg-icons';
+import Quill from 'quill';
+import 'react-quill/dist/quill.snow.css';
 
 const INITIAL_FORM_STATE = {
     title: '',
@@ -14,9 +16,14 @@ const INITIAL_FORM_STATE = {
     folder_id: null,
 };
 
+const Size = Quill.import('formats/size');
+Size.whitelist = ['12px', '14px', '16px', '18px', '24px', '32px'];
+Quill.register(Size, true);
+
 const QUILL_MODULES = {
     toolbar: [
-        [{ header: [1, 2, 3, false] }],
+        [{ font: [] }],
+        [{ 'size': ['12px', '14px', '16px', '18px', '24px', '32px'] }],
         ['bold', 'italic', 'underline', 'strike'],
         [{ list: 'ordered' }, { list: 'bullet' }],
         [{ color: [] }, { background: [] }],
@@ -30,12 +37,36 @@ const NoteModal = ({ isOpen, onClose, note }) => {
     const dispatch = useDispatch();
     const folders = useSelector(state => state.folder.folders);
     const [formData, setFormData] = useState(INITIAL_FORM_STATE);
+    const quillRef = useRef();
 
     useEffect(() => {
         if (isOpen) {
             setFormData(note || INITIAL_FORM_STATE);
         }
     }, [isOpen, note]);
+
+    useEffect(() => {
+        if (!isOpen) return;
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape") {
+                onClose();
+            }
+            // Enter ile kaydet (sadece başlık input odakta veya editör boşsa)
+            if (e.key === "Enter" && !e.shiftKey) {
+                const active = document.activeElement;
+                if (
+                    active &&
+                    (active.name === "title" ||
+                        (quillRef.current && quillRef.current.editor && quillRef.current.editor.hasFocus()))
+                ) {
+                    e.preventDefault();
+                    handleSubmit();
+                }
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    });
 
     const handleInputChange = useCallback((field, value) => {
         setFormData(prev => ({ ...prev, [field]: value }));
@@ -91,6 +122,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
                     <div className="flex-1 overflow-y-auto">
                         <div className="flex flex-col h-full quill-wrapper">
                             <ReactQuill
+                                ref={quillRef}
                                 modules={QUILL_MODULES}
                                 value={formData.content}
                                 onChange={value => handleInputChange('content', value)}
