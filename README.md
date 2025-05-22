@@ -1,8 +1,19 @@
 # 📝 NOTDEFTERI.ONLINE
 
 **Basit. Hızlı. Paylaşılabilir.**  
+
 Notlarınızı saniyeler içinde oluşturun, düzenleyin ve paylaşın.  
+
 ✅ Şu anda aktif: [https://notdefteri.online](https://notdefteri.online)
+
+## 🚀 Özellikler
+
+- ⭐ **Not Favorileme:** Önemli notlarınızı kolayca favorilere ekleyip hızlı erişim sağlayabilirsiniz.
+- 🔗 **Notları Link ile Paylaşma:** Notlarınızı benzersiz bağlantılarla başkalarıyla güvenli şekilde paylaşabilirsiniz.
+- 📁 **Not Klasörleme:** Notlarınızı kategoriler ve klasörler altında düzenleyerek daha düzenli tutabilirsiniz.
+- 🙈 **Not Gizleme / Arşivleme:** İstediğiniz notları gizleyip, sadece kendi göreceğiniz şekilde saklayabilirsiniz.
+- 🔍 **Notlar Arası Arama:** Not başlıkları ve içeriklerinde hızlı ve etkili arama yapabilirsiniz.
+- 📄 **PDF Olarak Kaydetme:** Notlarınızı kolayca PDF formatında kaydedebilirsiniz.**
 
 
 ## 🖼️ Görüntüler
@@ -24,17 +35,6 @@ Notun linki: [https://notdefteri.online/note/17a6f6d2-7aab-44c5-960a-ad1578cac40
 
 ### Klasör Özelleştirme
 <img src="https://github.com/user-attachments/assets/a6772539-961f-4de8-ab08-bb26cdb6d256" width="200"/>
-
-
-
-## 🚀 Özellikler
-
-- ⭐ **Not Favorileme:** Önemli notlarınızı kolayca favorilere ekleyip hızlı erişim sağlayabilirsiniz.
-- 🔗 **Notları Link ile Paylaşma:** Notlarınızı benzersiz bağlantılarla başkalarıyla güvenli şekilde paylaşabilirsiniz.
-- 📁 **Not Klasörleme:** Notlarınızı kategoriler ve klasörler altında düzenleyerek daha düzenli tutabilirsiniz.
-- 🙈 **Not Gizleme / Arşivleme:** İstediğiniz notları gizleyip, sadece kendi göreceğiniz şekilde saklayabilirsiniz.
-- 🔍 **Notlar Arası Arama:** Not başlıkları ve içeriklerinde hızlı ve etkili arama yapabilirsiniz.
-- 📄 **PDF Olarak Kaydetme:** Notlarınızı kolayca PDF formatında kaydedebilirsiniz.
 
 ## 📬 İletişim ve Destek
 
