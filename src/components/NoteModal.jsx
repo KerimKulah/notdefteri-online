@@ -51,18 +51,6 @@ const NoteModal = ({ isOpen, onClose, note }) => {
             if (e.key === "Escape") {
                 onClose();
             }
-            // Enter ile kaydet (sadece başlık input odakta veya editör boşsa)
-            if (e.key === "Enter" && !e.shiftKey) {
-                const active = document.activeElement;
-                if (
-                    active &&
-                    (active.name === "title" ||
-                        (quillRef.current && quillRef.current.editor && quillRef.current.editor.hasFocus()))
-                ) {
-                    e.preventDefault();
-                    handleSubmit();
-                }
-            }
         };
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
