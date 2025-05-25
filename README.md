@@ -18,7 +18,7 @@ Notlarınızı saniyeler içinde oluşturun, düzenleyin ve paylaşın.
 
 ## 🖼️ Görüntüler
 ### Landing
-![landing](https://github.com/user-attachments/assets/f23219f8-d0fc-47f0-b32d-3d34be7b2f0f)
+![landing](https://github.com/user-attachments/assets/40b4dfdf-11f9-47c0-b1b1-6309c5082b74)
 
 ### Giriş Ekranı
 ![login](https://github.com/user-attachments/assets/0b801d84-d5f4-4857-bdd1-83474d64e06e)
