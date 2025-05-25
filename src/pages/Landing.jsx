@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faFolder, faShareAlt, faCloud, faSearch, faLock, faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
 const SCREENSHOTS = {
     concept: "https://i.hizliresim.com/t5el2kq.png", // Masaüstü+mobil birleştirilmiş konsept görselin URL'si
@@ -23,7 +24,13 @@ const features = [
 const Landing = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const [modalImg, setModalImg] = useState(null);
+    const [scrollY, setScrollY] = useState(0);
 
+    useEffect(() => {
+        const handleScroll = () => setScrollY(window.scrollY);
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleSmoothScroll = (e, id) => {
         e.preventDefault();
@@ -38,14 +45,27 @@ const Landing = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="min-h-screen flex flex-col bg-gray-100">
             {/* Header */}
             <header className="bg-white/80 shadow sticky top-0 z-40">
                 <div className="max-w-6xl mx-auto flex items-center justify-between py-4 px-4 relative">
                     {/* Logo */}
-                    <div className="flex items-center gap-2">
-                        <img src="https://i.hizliresim.com/5laf03t.png" alt="Logo" className="w-8 h-8" />
-                        <span className="text-xl font-bold text-indigo-700">NOTDEFTERI.ONLINE</span>
+                    <div className="flex items-center gap-3">
+                        <div className="relative group">
+                            <img
+                                src="https://i.hizliresim.com/5laf03t.png"
+                                alt="Logo"
+                                className="w-12 h-12 transition transform" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-indigo-800 to-indigo-400 rounded-full blur opacity-10 transition-opacity -z-10"></div>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-2xl font-bold text-indigo-800 bg-clip-text">
+                                NOTDEFTERI
+                            </span>
+                            <span className="text-sm font-medium text-indigo-500 tracking-wider">
+                                .ONLINE
+                            </span>
+                        </div>
                     </div>
                     {/* Hamburger (mobil) */}
                     <button
@@ -62,8 +82,7 @@ const Landing = () => {
                                 <a
                                     href="#features"
                                     onClick={e => handleSmoothScroll(e, '#features')}
-                                    className="text-gray-700 hover:text-indigo-600 px-2 py-1 rounded transition"
-                                >
+                                    className="text-gray-700 hover:text-indigo-600 px-2 py-1 rounded transition">
                                     Özellikler
                                 </a>
                             </li>
@@ -77,12 +96,18 @@ const Landing = () => {
                                 </a>
                             </li>
                             <li>
-                                <Link to="/login" className="px-4 py-1 rounded-lg text-indigo-600 border border-indigo-600 hover:bg-indigo-50 transition font-medium">
+                                <Link
+                                    to="/login"
+                                    className="inline-block w-25 text-center px-4 py-1 rounded-lg text-indigo-600 border border-indigo-600 hover:bg-indigo-50 transition font-medium"
+                                >
                                     Giriş Yap
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/register" className="px-4 py-1 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition font-medium">
+                                <Link
+                                    to="/register"
+                                    className="inline-block w-25 text-center px-4 py-1 rounded-lg bg-indigo-600  border border-indigo-600 text-white hover:bg-indigo-700 transition font-medium"
+                                >
                                     Kayıt Ol
                                 </Link>
                             </li>
@@ -111,12 +136,18 @@ const Landing = () => {
                                     </a>
                                 </li>
                                 <li>
-                                    <Link to="/login" className="px-4 py-2 rounded-lg text-indigo-600 border border-indigo-600 hover:bg-indigo-50 transition font-medium block">
+                                    <Link
+                                        to="/login"
+                                        className="inline-block w-28 text-center px-2 py-1 rounded-lg text-indigo-600 border border-indigo-600 hover:bg-indigo-50 transition font-medium"
+                                    >
                                         Giriş Yap
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/register" className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition font-medium block">
+                                    <Link
+                                        to="/register"
+                                        className="inline-block w-28 border border-indigo-600 text-center px-2 py-1 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition font-medium"
+                                    >
                                         Kayıt Ol
                                     </Link>
                                 </li>
@@ -127,42 +158,53 @@ const Landing = () => {
             </header>
 
             {/* Hero Section */}
-            <section className="flex flex-col-reverse md:flex-row items-center justify-between max-w-6xl mx-auto py-16 px-4 gap-10">
-                {/* Sol: Başlık ve CTA */}
-                <div className="flex-1 text-center md:text-left">
-                    <h1 className="text-4xl md:text-5xl font-bold text-indigo-700 mb-4 leading-tight">
-                        Notlarınız Her Zaman Yanınızda
-                    </h1>
-                    <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-xl">
-                        notdefteri.online ile notlarınızı düzenleyin, organize edin ve istediğiniz yerden erişin.<br />
-                        Klasörler oluşturun, notlarınızı paylaşın ve güvenle saklayın!
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <Link to="/register" className="hover:scale-105 px-8 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 text-lg font-semibold shadow transition">
-                            Hemen Başla
+            <div className="flex flex-col-reverse lg:flex-row items-center justify-between max-w-7xl mx-auto py-20 px-6 gap-16 relative z-10">
+                {/* Enhanced Left Content */}
+                <div className="flex-1 text-center lg:text-left space-y-8">
+                    <div className="space-y-6">
+                        <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                            <span className="text-indigo-800">
+                                NOTLARINIZ HER
+                            </span>
+                            <br />
+                            <span className="text-indigo-800 ">
+                                ZAMAN YANINIZDA
+                            </span>
+                        </h1>
+
+                        <p className="text-xl lg:text-2xl text-black max-w-2xl leading-relaxed">
+                            Notlarınızı düzenleyin, organize edin ve istediğiniz yerden erişin.
+                            Klasörler oluşturun, notlarınızı paylaşın ve güvenle saklayın!
+                        </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <Link to="/login" className="hover:scale-105 px-8 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 text-lg font-semibold shadow transition">
+                            Ücretsiz Başlayın
+                            <span className="group-hover:translate-x-1 transition-transform"> →</span>
                         </Link>
-                        <a
-                            href="#features"
-                            onClick={e => handleSmoothScroll(e, '#features')}
-                            className="hover:scale-105  px-8 py-3 rounded-lg border border-indigo-600 text-indigo-600 hover:bg-indigo-50 text-lg font-semibold shadow transition"
-                        >
-                            Daha Fazla Öğren
-                        </a>
                     </div>
                 </div>
-                {/* Sağ: Konsept görsel */}
-                <div className="flex-1 flex justify-center items-center">
-                    <img
-                        src={SCREENSHOTS.concept}
-                        alt="NotDefteri.online Masaüstü ve Mobil"
-                        className="hover:scale-105  transition w-full max-w-md md:max-w-lg"
-                        style={{
-                            objectFit: 'contain',
-                            filter: 'drop-shadow(0 20px 64px rgba(49,46,129,0.38))'
-                        }}
-                    />
+
+                {/* Enhanced Right Image */}
+                <div className="flex-1 flex justify-center items-center relative">
+                    <div className="relative group">
+                        <img
+                            src={SCREENSHOTS.concept}
+                            alt="NotDefteri.online"
+                            className="w-full max-w-2xl transition-all duration-700 hover:scale-105 rounded-2xl"
+                            style={{
+                                filter: 'drop-shadow(5px 20px 20px rgb(61, 63, 165))',
+                                transform: `translateY(${scrollY * 0.1}px)`
+                            }}
+                        />
+                        {/* Floating elements */}
+                        <div className="hidden lg:block absolute top-13 -left-150 w-10 h-10 bg-indigo-400 rounded-full blur opacity-80 animate-bounce" style={{ animationDelay: '3s' }}></div>
+                        <div className="hidden lg:block absolute -top-13 right-20 w-16 h-16 bg-indigo-400 rounded-full blur opacity-80 animate-bounce -z-10" style={{ animationDelay: '1s' }}></div>
+                        <div className="hidden lg:block absolute -bottom-20 -left-8 w-12 h-12 bg-indigo-400 blur rounded-full opacity-80 animate-bounce" style={{ animationDelay: '2s' }}></div>
+                    </div>
                 </div>
-            </section>
+            </div>
 
             {/* Features Section */}
             <section id="features" className="py-16 px-4 bg-white">
@@ -174,7 +216,7 @@ const Landing = () => {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     {features.map((f, i) => (
-                        <div key={i} className="bg-white hover:scale-105 rounded-2xl p-8 shadow hover:shadow-xl transition flex flex-col items-center text-center">
+                        <div key={i} className="bg-white hover:scale-105 rounded-2xl p-8 shadow-lg hover:shadow-xl transition flex flex-col items-center text-center">
                             <div className="text-4xl text-indigo-600 mb-4">
                                 <FontAwesomeIcon icon={f.icon} />
                             </div>
@@ -197,7 +239,7 @@ const Landing = () => {
                     {[SCREENSHOTS.texteditor, SCREENSHOTS.desktop, SCREENSHOTS.folderCustomization].map((src, i) => (
                         <div
                             key={i}
-                            className="flex-1 min-w-[220px] max-w-[340px] rounded-xl overflow-hidden shadow-md hover:shadow-xl transition hover:scale-105 bg-white flex items-center justify-center cursor-pointer"
+                            className="flex-1 min-w-[220px] max-w-[340px] rounded-xl overflow-hidden shadow-lg  hover:shadow-xl transition hover:scale-105 bg-white flex items-center justify-center cursor-pointer"
                             style={{ aspectRatio: "4/3", height: "auto", minHeight: 180 }}
                             onClick={() => setModalImg(src)}
                         >
@@ -229,7 +271,7 @@ const Landing = () => {
             )}
 
             {/* CTA Section */}
-            <section className="bg-gradient-to-r from-indigo-600 to-blue-400 text-white py-16 px-4 text-center">
+            <section className="bg-indigo-600 text-white py-16 px-4 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Hemen Ücretsiz Deneyin</h2>
                 <p className="text-lg max-w-2xl mx-auto mb-8">
                     Notdefteri.online ile daha düzenli ve verimli olun. Saniyeler içinde hesap oluşturun ve not tutmaya başlayın.

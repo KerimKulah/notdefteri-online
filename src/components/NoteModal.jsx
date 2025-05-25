@@ -120,6 +120,8 @@ const NoteModal = ({ isOpen, onClose, note }) => {
                         </div>
                     </div>
 
+                    {/* Eğer selected folder varsa start value o olması lazım selectedfolder (NoteSliceda) useDispatch ile kullanılacak.*/}
+
                     {/* Footer */}
                     <div className="p-4 bg-gray-50 rounded-b-xl border-t">
                         <div className="flex flex-wrap items-center gap-4">
@@ -127,8 +129,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
                                 <select
                                     value={formData.folder_id || ""}
                                     onChange={e => handleInputChange('folder_id', e.target.value === "" ? null : e.target.value)}
-                                    className="w-full max-w-xs px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                >
+                                    className="hover:bg-gray-100 w-full max-w-xs px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                     <option value="">Klasör seçin</option>
                                     {folders.map(folder => (
                                         <option key={folder.id} value={folder.id}>{folder.name}</option>
@@ -139,7 +140,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
                             <div className="flex items-center gap-4 flex-wrap">
                                 <button
                                     onClick={() => handleToggle('is_private')}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:scale-105 
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all  
                                         ${formData.is_private
                                             ? 'bg-purple-200 text-black'
                                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
@@ -150,7 +151,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
 
                                 <button
                                     onClick={() => handleToggle('is_favorite')}
-                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all hover:scale-105
+                                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all 
                                         ${formData.is_favorite
                                             ? 'bg-yellow-200 text-black'
                                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
@@ -161,7 +162,7 @@ const NoteModal = ({ isOpen, onClose, note }) => {
 
                                 <button
                                     onClick={handleSubmit}
-                                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-800 transition-all hover:scale-105 focus:ring-2 focus:ring-blue-400"
+                                    className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-800 transition-all  focus:ring-2 focus:ring-blue-400"
                                 >
                                     {note ? 'Güncelle' : 'Kaydet'}
                                 </button>

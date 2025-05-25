@@ -163,7 +163,6 @@
     height: 48px;
     border: 5px solid rgba(0, 0, 0, 0.1);
     border-top-color: #4f46e5;
-    /* Mor ton */
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -229,4 +228,19 @@
 
 .ql-size-32px {
     font-size: 32px;
+}
+
+
+
+/* Özel scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4f46e5;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3730a3;
 }
