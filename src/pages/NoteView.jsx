@@ -25,25 +25,29 @@ function NoteView() {
 
 
     useEffect(() => {
-        // Önce store'da var mı bak
-        const found = notes.find(n => n.link_id === link);
-        if (found) {
-            setNote(found);
-            setLoading(false);
-        } else {
-            // Yoksa Supabase'den çek
-            (async () => {
+        const fetchSharedNote = async () => {
+            try {
                 setLoading(true);
                 const { data, error } = await supabase
                     .from('note')
                     .select('*')
                     .eq('link_id', link)
                     .single();
-                setNote(data || null);
+
+                if (error) throw error;
+                if (!data) throw new Error('Not bulunamadı');
+
+                setNote(data);
+            } catch (err) {
+                console.error('Paylaşılan not yüklenirken hata:', err);
+                setError(err.message);
+            } finally {
                 setLoading(false);
-            })();
-        }
-    }, [link, notes]);
+            }
+        };
+
+        fetchSharedNote();
+    }, [link]);
 
     if (loading) {
         return (
@@ -60,7 +64,7 @@ function NoteView() {
             <div className="flex items-center justify-center min-h-[60vh]">
                 <div className="bg-white p-8 rounded-lg shadow text-center">
                     <h2 className="text-2xl font-bold mb-2">Not bulunamadı</h2>
-                    <p className="text-gray-500">Paylaşılan bağlantı hatalı veya not silinmiş olabilir.</p>
+                    <p className="text-gray-500">Paylaşılan bağlantı hatalı, not silinmiş veya gizli olabilir.</p>
                 </div>
             </div>
         );
