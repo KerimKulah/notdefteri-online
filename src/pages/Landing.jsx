@@ -45,8 +45,7 @@ const Landing = () => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-gray-100">
-            {/* Header */}
+        <div className="h-full flex flex-col bg-gradient-to-b from-gray-100 via-white to-white">            {/* Header */}
             <header className="bg-white/80 shadow sticky top-0 z-40">
                 <div className="max-w-6xl mx-auto flex items-center justify-between py-4 px-4 relative">
                     {/* Logo */}
@@ -158,11 +157,11 @@ const Landing = () => {
             </header>
 
             {/* Hero Section */}
-            <div className="flex flex-col-reverse lg:flex-row items-center justify-between max-w-7xl mx-auto py-20 px-6 gap-16 relative z-10">
+            <div className="flex flex-col-reverse lg:flex-row items-center justify-between max-w-6xl mx-auto py-20 px-6 gap-16 relative z-10">
                 {/* Enhanced Left Content */}
                 <div className="flex-1 text-center lg:text-left space-y-8">
                     <div className="space-y-6">
-                        <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
+                        <h1 className="text-4xl lg:text-5xl font-bold leading-tight">
                             <span className="text-indigo-800">
                                 NOTLARINIZ HER
                             </span>
@@ -188,20 +187,19 @@ const Landing = () => {
 
                 {/* Enhanced Right Image */}
                 <div className="flex-1 flex justify-center items-center relative">
-                    <div className="relative group">
+                    <div className="relative group ">
                         <img
                             src={SCREENSHOTS.concept}
                             alt="NotDefteri.online"
-                            className="w-full max-w-2xl transition-all duration-700 hover:scale-105 rounded-2xl"
+                            className="lg:translate-x-14 w-full max-w-2xl transition-all duration-700 hover:scale-105 rounded-2xl"
                             style={{
-                                filter: 'drop-shadow(5px 20px 20px rgb(61, 63, 165))',
+                                filter: 'drop-shadow(1px 5px 10px rgb(45, 49, 167))',
                                 transform: `translateY(${scrollY * 0.1}px)`
                             }}
                         />
                         {/* Floating elements */}
-                        <div className="hidden lg:block absolute top-13 -left-150 w-10 h-10 bg-indigo-400 rounded-full blur opacity-80 animate-bounce" style={{ animationDelay: '3s' }}></div>
+                        <div className="hidden lg:block absolute top-79 -left-130 w-10 h-10 bg-indigo-400 rounded-full blur opacity-80 animate-bounce" style={{ animationDelay: '2s' }}></div>
                         <div className="hidden lg:block absolute -top-13 right-20 w-16 h-16 bg-indigo-400 rounded-full blur opacity-80 animate-bounce -z-10" style={{ animationDelay: '1s' }}></div>
-                        <div className="hidden lg:block absolute -bottom-20 -left-8 w-12 h-12 bg-indigo-400 blur rounded-full opacity-80 animate-bounce" style={{ animationDelay: '2s' }}></div>
                     </div>
                 </div>
             </div>
