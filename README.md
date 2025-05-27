@@ -14,11 +14,14 @@ Notlarınızı saniyeler içinde oluşturun, düzenleyin ve paylaşın.
 - 🙈 **Not Gizleme / Arşivleme:** İstediğiniz notları gizleyip, sadece kendi göreceğiniz şekilde saklayabilirsiniz.
 - 🔍 **Notlar Arası Arama:** Not başlıkları ve içeriklerinde hızlı ve etkili arama yapabilirsiniz.
 - 📄 **PDF Olarak Kaydetme:** Notlarınızı kolayca PDF formatında kaydedebilirsiniz.**
+- 🌙 **Karanlık Mod:** Göz yormayan koyu tema ile daha konforlu bir kullanım sunar.
 
 
 ## 🖼️ Görüntüler
 ### Landing
-![landing](https://github.com/user-attachments/assets/40b4dfdf-11f9-47c0-b1b1-6309c5082b74)
+![landing](https://github.com/user-attachments/assets/ec780288-f583-4480-939d-f264faa683d3)
+![image](https://github.com/user-attachments/assets/d1651482-6e61-4072-ae42-0e8b98d46a5c)
+
 
 ### Giriş Ekranı
 ![login](https://github.com/user-attachments/assets/0b801d84-d5f4-4857-bdd1-83474d64e06e)
