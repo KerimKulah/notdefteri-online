@@ -5,6 +5,7 @@ import { faFolderPlus, faLayerGroup, faStar, faFolder, faTrash, faPen } from '@f
 import { newFolder, updateFolder, deleteFolder, getFolders, setFilter, setSelectedFolder } from '../redux/FolderSlice';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import { useDarkMode } from "../context/DarkModeContext";
 
 const iconColorClasses = {
     red: 'text-red-500',
@@ -32,6 +33,8 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
     const selectedFolder = useSelector((state) => state.folder.selectedFolder);
     const filter = useSelector((state) => state.folder.filter);
     const [editingFolderId, setEditingFolderId] = useState(null);
+    const { darkMode, toggleDarkMode } = useDarkMode();
+
     const [colorPickerId, setColorPickerId] = useState(null);
 
 
