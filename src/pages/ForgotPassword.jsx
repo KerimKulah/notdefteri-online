@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { resetPassword } from '../redux/AuthSlice';
 import { Link } from 'react-router-dom';
+import { useDarkMode } from "../context/DarkModeContext";
 
 function ForgotPassword() {
     const dispatch = useDispatch();
@@ -9,6 +10,7 @@ function ForgotPassword() {
     const [email, setEmail] = useState('');
     const [success, setSuccess] = useState(false);
     const [emailError, setEmailError] = useState('');
+    const { darkMode } = useDarkMode();
 
     const validateEmail = (email) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,16 +34,16 @@ function ForgotPassword() {
 
     if (success) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-gray-50">
-                <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-lg transition-all duration-300">
+            <div className={`flex items-center justify-center min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+                <div className={`w-full max-w-md p-8 space-y-6 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-lg transition-all duration-300`}>
                     <div className="text-center">
-                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 mb-4">
+                        <div className={`inline-flex items-center justify-center w-16 h-16 rounded-full ${darkMode ? 'bg-green-900' : 'bg-green-100'} mb-4`}>
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
                         </div>
-                        <h2 className="text-2xl font-bold text-gray-800 mb-2">Şifre Sıfırlama E-postası Gönderildi!</h2>
-                        <p className="text-md text-gray-700 mb-6">
+                        <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'} mb-2`}>Şifre Sıfırlama E-postası Gönderildi!</h2>
+                        <p className={`text-md ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-6`}>
                             <span className="font-semibold">{email}</span> adresine şifre sıfırlama bağlantısı gönderildi.
                         </p>
                         <Link
@@ -57,23 +59,23 @@ function ForgotPassword() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-50">
-            <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl">
+        <div className={`flex items-center justify-center min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+            <div className={`w-full max-w-md p-8 space-y-8 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl`}>
                 <div className="text-center">
-                    <h2 className="text-3xl font-bold text-gray-800">Şifremi Unuttum</h2>
-                    <div className="mt-3 text-sm text-gray-600">
+                    <h2 className={`text-3xl font-bold ${darkMode ? 'text-white' : 'text-gray-800'}`}>Şifremi Unuttum</h2>
+                    <div className={`mt-3 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                         Hesabınıza erişmek için e-posta adresinizi girin.
                     </div>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="space-y-5">
                         <div className="relative">
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label htmlFor="email" className={`block text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'} mb-1`}>
                                 Email
                             </label>
                             <div className="relative rounded-md shadow-sm">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
                                     </svg>
                                 </div>
@@ -85,8 +87,8 @@ function ForgotPassword() {
                                     placeholder="Email adresiniz"
                                     value={email}
                                     onChange={e => setEmail(e.target.value)}
-                                    className={`block w-full pl-10 pr-3 py-2 border ${emailError ? 'border-red-300' : 'border-gray-300'
-                                        } rounded-lg focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200`}
+                                    className={`block w-full pl-10 pr-3 py-2 border ${emailError ? 'border-red-300' : darkMode ? 'border-gray-600' : 'border-gray-300'
+                                        } rounded-lg ${darkMode ? 'bg-gray-700 text-white placeholder-gray-400' : 'bg-white text-gray-900'} focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200`}
                                 />
                             </div>
                             {emailError && (
@@ -100,9 +102,9 @@ function ForgotPassword() {
                         </div>
                     </div>
                     {error && (
-                        <div className="p-4 text-sm text-red-700 bg-red-50 rounded-lg border border-red-200">
+                        <div className={`p-4 text-sm ${darkMode ? 'text-red-400 bg-red-900/20 border-red-800' : 'text-red-700 bg-red-50 border-red-200'} rounded-lg border`}>
                             <div className="flex">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className={`h-5 w-5 mr-2 ${darkMode ? 'text-red-400' : 'text-red-500'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                                 {error}
@@ -125,8 +127,8 @@ function ForgotPassword() {
                         </button>
                     </div>
                 </form>
-                <div className="mt-6 text-xs text-center text-gray-500">
-                    <Link to="/login" className="text-indigo-600 hover:text-indigo-500">Giriş Yap</Link>
+                <div className={`mt-6 text-xs text-center ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    <Link to="/login" className="text-indigo-500 font-semibold hover:text-indigo-500">Giriş Yap</Link>
                 </div>
             </div>
         </div>

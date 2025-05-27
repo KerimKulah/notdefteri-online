@@ -30,7 +30,8 @@ function Home() {
     };
 
     return (
-        <div className='bg-gray-50 text-gray-900s transition-all duration-300 min-h-screen flex flex-col'>
+        <div className='bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-white transition-all duration-300 min-h-screen flex flex-col'>
+
             <Headerr onAddNoteClick={openEmptyModal} onSearch={setSearchQuery} isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
             <div className="flex flex-grow">
                 <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />

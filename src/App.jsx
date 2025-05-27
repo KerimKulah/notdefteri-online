@@ -16,7 +16,7 @@ import PublicRoute from './router/PublicRoute';
 import ResetPassword from './pages/ResetPassword';
 import ForgotPassword from './pages/ForgotPassword';
 import Landing from './pages/Landing';
-
+import { DarkModeProvider } from "./context/DarkModeContext";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,16 +47,18 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
-        <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
-        <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
-        <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
-        <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
-        <Route path="/profile" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
-        <Route path="/note/:link" element={<NoteView />} />
-      </Routes>
+      <DarkModeProvider>
+        <Routes>
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/forgot-password" element={<PublicRoute><ForgotPassword /></PublicRoute>} />
+          <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
+          <Route path="/register" element={<PublicRoute><Register /></PublicRoute>} />
+          <Route path="/" element={<PublicRoute><Landing /></PublicRoute>} />
+          <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute><ProfileSettings /></ProtectedRoute>} />
+          <Route path="/note/:link" element={<NoteView />} />
+        </Routes>
+      </DarkModeProvider>
     </>
   )
 }

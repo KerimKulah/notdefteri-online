@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 /* ReactQuill Editor Styles */
 .quill-wrapper {
@@ -17,7 +18,6 @@
     position: sticky;
     top: 0;
     z-index: 10;
-    background: white;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -25,6 +25,98 @@
 
 .quill-wrapper .ql-editor {
     min-height: 350px;
+}
+
+/* Light Mode Styles */
+.quill-wrapper .ql-toolbar {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.quill-wrapper .ql-editor {
+    background: white;
+    color: #1f2937;
+}
+
+/* Dark Mode Styles */
+.dark .quill-wrapper .ql-toolbar {
+    background-color: #374151 !important;
+    border-bottom: 1px solid #4b5563 !important;
+}
+
+.dark .quill-wrapper .ql-toolbar .ql-stroke {
+    stroke: #f9fafb !important;
+}
+
+.dark .quill-wrapper .ql-toolbar .ql-fill {
+    fill: #f9fafb !important;
+}
+
+.dark .quill-wrapper .ql-toolbar button {
+    color: #f9fafb !important;
+}
+
+.dark .quill-wrapper .ql-toolbar button:hover {
+    background-color: #4b5563 !important;
+}
+
+.dark .quill-wrapper .ql-toolbar button.ql-active {
+    background-color: #6366f1 !important;
+    color: white !important;
+}
+
+.dark .quill-wrapper .ql-toolbar .ql-picker {
+    color: #f9fafb !important;
+}
+
+.dark .quill-wrapper .ql-toolbar .ql-picker-label {
+    color: #f9fafb !important;
+    border-color: #4b5563 !important;
+}
+
+.dark .quill-wrapper .ql-toolbar .ql-picker-label:hover {
+    background-color: #4b5563 !important;
+}
+
+.dark .quill-wrapper .ql-toolbar .ql-picker-options {
+    background-color: #374151 !important;
+    border-color: #4b5563 !important;
+}
+
+.dark .quill-wrapper .ql-toolbar .ql-picker-item {
+    color: #f9fafb !important;
+}
+
+.dark .quill-wrapper .ql-toolbar .ql-picker-item:hover {
+    background-color: #4b5563 !important;
+}
+
+.dark .quill-wrapper .ql-editor {
+    background-color: #1f2937 !important;
+    color: #f9fafb !important;
+    border-color: #4b5563 !important;
+}
+
+.dark .quill-wrapper .ql-container {
+    border-color: #4b5563 !important;
+}
+
+/* Scrollbar styling for dark mode */
+.dark .quill-wrapper .ql-editor::-webkit-scrollbar {
+    width: 8px;
+}
+
+.dark .quill-wrapper .ql-editor::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+.dark .quill-wrapper .ql-editor::-webkit-scrollbar-thumb {
+    background: #6b7280;
+    border-radius: 4px;
+}
+
+.dark .quill-wrapper .ql-editor::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
 }
 
 /* Note View Styles */

@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faFolderPlus,
-    faLayerGroup,
-    faStar,
-    faFolder,
-    faTrash,
-    faPen,
-    faBars,
-    faXmark
-} from '@fortawesome/free-solid-svg-icons';
+import { faFolderPlus, faLayerGroup, faStar, faFolder, faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { newFolder, updateFolder, deleteFolder, getFolders, setFilter, setSelectedFolder } from '../redux/FolderSlice';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -42,6 +33,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
     const filter = useSelector((state) => state.folder.filter);
     const [editingFolderId, setEditingFolderId] = useState(null);
     const [colorPickerId, setColorPickerId] = useState(null);
+
 
     useEffect(() => {
         const handleClickOutside = (e) => {
@@ -105,12 +97,12 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
     const handleDeleteFolder = (id) => {
         confirmAlert({
             customUI: ({ onClose }) => (
-                <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm mx-auto mt-40">
-                    <h2 className="text-xl font-bold mb-4">Klasörü Sil</h2>
-                    <p className="mb-6 text-gray-600">Bu klasörü silmek istediğinize emin misiniz?</p>
+                <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 max-w-sm mx-auto mt-40">
+                    <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Klasörü Sil</h2>
+                    <p className="mb-6 text-gray-600 dark:text-gray-300">Bu klasörü silmek istediğinize emin misiniz?</p>
                     <div className="flex justify-end gap-3">
                         <button
-                            className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                            className="px-4 py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors"
                             onClick={onClose}>
                             İptal
                         </button>
@@ -137,7 +129,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
             )}
             <div
                 id="mobile-sidebar"
-                className={`sidebar-container bg-white p-4
+                className={`sidebar-container bg-white dark:bg-gray-800 p-4
                     fixed md:sticky top-16 h-[calc(100vh-64px)] overflow-y-auto
                     transition-all duration-300 ease-in-out z-20
                     md:w-64 md:translate-x-0 md:shadow-none
@@ -146,10 +138,10 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                         : 'w-72 -translate-x-full md:translate-x-0'}`}>
 
                 <div className="flex justify-between items-center mb-4">
-                    <h2 className="font-bold text-lg">Klasörler</h2>
+                    <h2 className="font-bold text-lg text-gray-900 dark:text-white">Klasörler</h2>
                     <button
                         onClick={handleNewFolder}
-                        className="hover:bg-gray-100 w-8 h-8 flex items-center justify-center text-indigo-600 rounded-lg transition-colors">
+                        className="hover:bg-gray-100 dark:hover:bg-gray-700 w-8 h-8 flex items-center justify-center text-indigo-600 dark:text-indigo-400 rounded-lg transition-colors">
                         <FontAwesomeIcon icon={faFolderPlus} />
                     </button>
                 </div>
@@ -162,7 +154,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                         }}
                         className={`flex items-center w-full p-2.5 rounded-lg transition-colors ${filter === 'all'
                             ? 'bg-indigo-600 text-white'
-                            : 'hover:bg-gray-100 text-gray-700'
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
                             }`}>
                         <FontAwesomeIcon icon={faLayerGroup} className="w-4 h-4" />
                         <span className="ml-2 flex-1">Tüm Notlar</span>
@@ -178,7 +170,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                         }}
                         className={`flex items-center w-full p-2.5 rounded-lg transition-colors ${filter === 'favorite'
                             ? 'bg-yellow-200 text-black'
-                            : 'hover:bg-gray-100 text-gray-700'
+                            : 'hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300'
                             }`}>
                         <FontAwesomeIcon icon={faStar} className="w-4 h-4" />
                         <span className="ml-2 flex-1">Favoriler</span>
@@ -188,22 +180,22 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                     </button>
                 </div>
 
-                <div className="border-t border-b border-gray-200 py-4">
-                    <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">
+                <div className="border-t border-b border-gray-200 dark:border-gray-600 py-4">
+                    <h3 className="text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-2">
                         Oluşturulanlar
                     </h3>
 
                     <ul className="space-y-1">
                         {folders.length === 0 ? (
-                            <li className="text-gray-400 text-sm px-2 py-3 text-center select-none">
+                            <li className="text-gray-400 dark:text-gray-500 text-sm px-2 py-3 text-center select-none">
                                 Henüz oluşturduğunuz klasör yok.
                             </li>
                         ) : (
                             folders.map((folder) => (
                                 <li key={folder.id} onClick={() => handleFolderSelect(folder)}
                                     className={`rounded-lg cursor-pointer transition-colors ${selectedFolder?.id === folder.id
-                                        ? 'bg-gray-200'
-                                        : 'hover:bg-gray-100'
+                                        ? 'bg-gray-200 dark:bg-gray-700'
+                                        : 'hover:bg-gray-100 dark:hover:bg-gray-700'
                                         }`}>
                                     <div className="p-2 flex items-center">
                                         <span onClick={(e) => { e.stopPropagation(); setColorPickerId(folder.id) }}
@@ -213,7 +205,7 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
 
                                         <div className="ml-2 flex-1 min-w-0 flex items-center">
                                             {editingFolderId === folder.id ? (
-                                                <input autoFocus type="text" className="w-full px-2 py-1 text-sm border rounded bg-white"
+                                                <input autoFocus type="text" className="w-full px-2 py-1 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
                                                     defaultValue={folder.name}
                                                     placeholder="Klasör adı..."
                                                     onClick={e => e.stopPropagation()}
@@ -224,18 +216,18 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                                                 />
                                             ) : (
                                                 <>
-                                                    <span className="truncate text-sm" title={folder.name}>
+                                                    <span className="truncate text-sm text-gray-900 dark:text-white" title={folder.name}>
                                                         {folder.name}
                                                     </span>
                                                     <div className="ml-auto flex items-center gap-1.5">
-                                                        <span className="bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded text-xs min-w-[1.25rem] text-center">
+                                                        <span className="bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 px-1.5 py-0.5 rounded text-xs min-w-[1.25rem] text-center">
                                                             {getFolderNoteCount(folder.id)}
                                                         </span>
                                                         <button onClick={(e) => { e.stopPropagation(); setEditingFolderId(folder.id) }}
-                                                            className="p-1 text-gray-400 hover:text-gray-600 rounded transition-colors">
+                                                            className="p-1 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 rounded transition-colors">
                                                             <FontAwesomeIcon icon={faPen} className="w-3 h-3" />
                                                         </button>
-                                                        <button onClick={(e) => { e.stopPropagation(); handleDeleteFolder(folder.id) }} className="p-1 text-gray-400 hover:text-red-500 rounded transition-colors">
+                                                        <button onClick={(e) => { e.stopPropagation(); handleDeleteFolder(folder.id) }} className="p-1 text-gray-400 dark:text-gray-500 hover:text-red-500 dark:hover:text-red-400 rounded transition-colors">
                                                             <FontAwesomeIcon icon={faTrash} className="w-3 h-3" />
                                                         </button>
                                                     </div>
@@ -253,8 +245,8 @@ function Sidebar({ isSidebarOpen, setIsSidebarOpen }) {
                                                     onClick={() => handleColorChange(folder.id, color)}
                                                     className={`w-4 h-4 rounded-full ${colorClasses[color]} 
                                                     ${folder.color === color
-                                                            ? 'ring-2 ring-offset-2 ring-gray-400'
-                                                            : 'hover:ring-2 hover:ring-offset-2 hover:ring-gray-200'
+                                                            ? 'ring-2 ring-offset-2 ring-gray-400 dark:ring-gray-500 dark:ring-offset-gray-800'
+                                                            : 'hover:ring-2 hover:ring-offset-2 hover:ring-gray-200 dark:hover:ring-gray-500 dark:hover:ring-offset-gray-800'
                                                         } transition-all`} />
                                             ))}
                                         </div>
