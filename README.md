@@ -31,7 +31,7 @@ Notlarınızı saniyeler içinde oluşturun, düzenleyin ve paylaşın.
 
 ### Not Paylaşımı
 ![noteShare](https://github.com/user-attachments/assets/0994167d-f242-4e8d-a699-fb20273a65a7)
-Notun linki: [https://notdefteri.online/note/17a6f6d2-7aab-44c5-960a-ad1578cac403](https://notdefteri.online/note/17a6d2-7aab-44c5-960a-ad1578cac403)
+Notun linki: https://notdefteri.online/note/17a6f6d2-7aab-44c5-960a-ad1578cac403
 
 ### Metin Editörü
 <img src="https://github.com/user-attachments/assets/8d87ff15-558a-4fc6-b380-2b9ddbcd1a0b" width="500"/>
