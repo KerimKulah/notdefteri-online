@@ -154,9 +154,9 @@ function NoteView() {
     if (loading) {
         return (
             <div className="flex items-center justify-center min-h-[60vh]">
-                <div className="bg-white p-8 rounded-lg shadow text-center">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 mx-auto mb-4"></div>
-                    <p className="text-gray-600">Not yükleniyor...</p>
+                <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow dark:shadow-slate-700/20 text-center">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600 dark:border-indigo-400 mx-auto mb-4"></div>
+                    <p className="text-gray-600 dark:text-slate-300">Not yükleniyor...</p>
                 </div>
             </div>
         );
@@ -166,17 +166,17 @@ function NoteView() {
     if (error) {
         return (
             <div className="flex items-center justify-center min-h-[60vh]">
-                <div className="bg-white p-8 rounded-lg shadow text-center max-w-md">
-                    <div className="text-red-500 mb-4">
+                <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow dark:shadow-slate-700/20 text-center max-w-md">
+                    <div className="text-red-500 dark:text-red-400 mb-4">
                         <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h2 className="text-2xl font-bold mb-2 text-gray-900">Bir sorun oluştu</h2>
-                    <p className="text-gray-600 mb-4">{error}</p>
+                    <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-slate-100">Bir sorun oluştu</h2>
+                    <p className="text-gray-600 dark:text-slate-300 mb-4">{error}</p>
                     <button
                         onClick={() => window.location.reload()}
-                        className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                        className="px-4 py-2 bg-indigo-600 dark:bg-indigo-500 text-white rounded-lg hover:bg-indigo-700 dark:hover:bg-indigo-600 transition"
                     >
                         Yeniden Dene
                     </button>
@@ -189,33 +189,33 @@ function NoteView() {
     if (!note) {
         return (
             <div className="flex items-center justify-center min-h-[60vh]">
-                <div className="bg-white p-8 rounded-lg shadow text-center max-w-md">
-                    <div className="text-gray-400 mb-4">
+                <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow dark:shadow-slate-700/20 text-center max-w-md">
+                    <div className="text-gray-400 dark:text-slate-500 mb-4">
                         <svg className="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                     </div>
-                    <h2 className="text-2xl font-bold mb-2 text-gray-900">Not bulunamadı</h2>
-                    <p className="text-gray-600">Bu bağlantı geçersiz, not silinmiş veya artık mevcut değil.</p>
+                    <h2 className="text-2xl font-bold mb-2 text-gray-900 dark:text-slate-100">Not bulunamadı</h2>
+                    <p className="text-gray-600 dark:text-slate-300">Bu bağlantı geçersiz, not silinmiş veya artık mevcut değil.</p>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 py-8 px-4">
+        <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-8 px-4 transition-colors">
             <div className="max-w-7xl mx-auto">
                 {/* Header - No Print */}
-                <div className="bg-white rounded-lg shadow-sm p-6 mb-4 no-print">
+                <div className="bg-white dark:bg-slate-800 rounded-lg shadow-sm dark:shadow-slate-700/20 p-6 mb-4 no-print border dark:border-slate-700">
                     <div className="flex flex-wrap items-center justify-between gap-4">
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                        <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400">
                             <FontAwesomeIcon icon={faCalendarDay} />
                             {formatDate(note.created_at)}
                         </div>
                         <div className="flex flex-wrap items-center gap-2">
                             <button
                                 onClick={handleShare}
-                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-lg transition text-sm"
+                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-300 rounded-lg transition text-sm border dark:border-indigo-800"
                                 disabled={showCopied}
                             >
                                 <FontAwesomeIcon icon={showCopied ? faCheck : faLink} />
@@ -223,14 +223,14 @@ function NoteView() {
                             </button>
                             <button
                                 onClick={handlePdf}
-                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-500 rounded-lg transition text-sm"
+                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-red-50 dark:bg-red-900/30 hover:bg-red-100 dark:hover:bg-red-900/50 text-red-500 dark:text-red-400 rounded-lg transition text-sm border dark:border-red-800"
                             >
                                 <FontAwesomeIcon icon={faFilePdf} />
                                 PDF
                             </button>
                             <button
                                 onClick={handlePrint}
-                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition text-sm"
+                                className="hover:scale-105 flex items-center gap-1 px-3 py-1.5 bg-gray-100 dark:bg-slate-700 hover:bg-gray-200 dark:hover:bg-slate-600 text-gray-700 dark:text-slate-300 rounded-lg transition text-sm border dark:border-slate-600"
                             >
                                 <FontAwesomeIcon icon={faPrint} />
                                 Yazdır
@@ -240,19 +240,19 @@ function NoteView() {
                 </div>
 
                 {/* Content - Printable */}
-                <div className="note-content-wrapper bg-white rounded-lg shadow-sm p-6">
-                    <h1 className="note-title text-3xl font-bold text-gray-900 flex items-center gap-3 break-all mb-6">
+                <div className="note-content-wrapper bg-white dark:bg-slate-800 rounded-lg shadow-sm dark:shadow-slate-700/20 p-6 border dark:border-slate-700">
+                    <h1 className="note-title text-3xl font-bold text-gray-900 dark:text-slate-100 flex items-center gap-3 break-all mb-6">
                         {note.title || 'Başlıksız Not'}
                         {note.is_favorite && (
-                            <FontAwesomeIcon icon={faStar} className="text-yellow-400" title="Favori" />
+                            <FontAwesomeIcon icon={faStar} className="text-yellow-400 dark:text-yellow-300" title="Favori" />
                         )}
                         {note.is_private && (
-                            <FontAwesomeIcon icon={faLock} className="text-gray-400" title="Gizli" />
+                            <FontAwesomeIcon icon={faLock} className="text-gray-400 dark:text-slate-500" title="Gizli" />
                         )}
                     </h1>
                     <div
                         ref={contentRef}
-                        className="note-content prose prose-lg max-w-none"
+                        className="note-content prose prose-lg dark:prose-invert max-w-none prose-headings:text-gray-900 dark:prose-headings:text-slate-100 prose-p:text-gray-700 dark:prose-p:text-slate-300 prose-a:text-indigo-600 dark:prose-a:text-indigo-400 prose-strong:text-gray-900 dark:prose-strong:text-slate-100 prose-code:text-gray-800 dark:prose-code:text-slate-200 prose-pre:bg-gray-50 dark:prose-pre:bg-slate-800 prose-blockquote:border-gray-300 dark:prose-blockquote:border-slate-600"
                         dangerouslySetInnerHTML={{ __html: note.content || '<p>İçerik bulunamadı.</p>' }}
                     />
                 </div>

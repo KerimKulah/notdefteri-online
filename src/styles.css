@@ -323,11 +323,17 @@
 }
 
 
-
 /* Özel scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
+    background: none;
 }
+
+.dark ::-webkit-scrollbar {
+    width: 8px;
+    background: #101828;
+}
+
 
 ::-webkit-scrollbar-thumb {
     background: #4f46e5;
